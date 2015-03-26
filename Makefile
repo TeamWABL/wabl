@@ -57,7 +57,7 @@ OPTIMIZE	= -Os
 #MCU_TARGET     = atmega324p
 #MCU_TARGET     = atmega325
 #MCU_TARGET     = atmega3250
-#MCU_TARGET     = atmega328p
+MCU_TARGET     = atmega328p
 #MCU_TARGET     = atmega329
 #MCU_TARGET		= atmega3290
 #MCU_TARGET     = atmega48
@@ -84,16 +84,19 @@ OPTIMIZE	= -Os
 #MCU_TARGET     = attiny84
 #MCU_TARGET     = attiny85
 #MCU_TARGET     = attiny861
-MCU_TARGET		= atmega1284p
+#MCU_TARGET		= atmega1284p
 
 #############################################
 #Pololu Library Settings
 #############################################
 
-#DEVICE_SPECIFIC_FLAGS	= 
-#DEVICE					= -lpololu_atmega328p
-DEVICE_SPECIFIC_FLAGS	= -D_X2_1284
-DEVICE					= -lpololu_atmega1284p_x2
+ifeq ($(MCU_TARGET),atmega328p)
+	DEVICE_SPECIFIC_FLAGS	= 
+	DEVICE					= -lpololu_atmega328p
+else ifeq ($(MCU_TARGET),atmega1284p)
+	DEVICE_SPECIFIC_FLAGS	= -D_X2_1284
+	DEVICE					= -lpololu_atmega1284p_x2
+endif
 
 ############################################
 
