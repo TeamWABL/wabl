@@ -159,4 +159,4 @@ flash: $(PRG).hex
 
 # enters avrdude terminal mode
 terminal:
-	avrdude -p $(MCU_TARGET) -c $(PROGRAMMER) -t
+	avrdude -p $(MCU_TARGET) -c $(PROGRAMMER) -P $(PORT) -t
