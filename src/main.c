@@ -40,5 +40,5 @@ int main(void){
         //pass uRef (torque) to pid motor controller
         motor_update_pid(uRef);
     }
-    return 1;
+    return 0;
 }

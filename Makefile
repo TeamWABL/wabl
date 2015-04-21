@@ -57,7 +57,7 @@ OPTIMIZE	= -Os
 #MCU_TARGET     = atmega324p
 #MCU_TARGET     = atmega325
 #MCU_TARGET     = atmega3250
-MCU_TARGET     = atmega328p
+#MCU_TARGET     = atmega328p
 #MCU_TARGET     = atmega329
 #MCU_TARGET		= atmega3290
 #MCU_TARGET     = atmega48
@@ -84,7 +84,9 @@ MCU_TARGET     = atmega328p
 #MCU_TARGET     = attiny84
 #MCU_TARGET     = attiny85
 #MCU_TARGET     = attiny861
-#MCU_TARGET		= atmega1284p
+MCU_TARGET		= atmega1284p
+
+PORT			= /dev/ttyUSB0
 
 #############################################
 #Pololu Library Settings
@@ -100,7 +102,7 @@ endif
 
 ############################################
 
-PROGRAMMER 	:= usbtiny
+PROGRAMMER 	:= avrisp2
 CC			:= avr-gcc
 OBJCOPY		:= avr-objcopy
 OBJDUMP		:= avr-objdump
@@ -153,7 +155,7 @@ endif
 
 # flashes the hex file to the chip via the pocket programmer
 flash: $(PRG).hex
-	avrdude -p $(MCU_TARGET) -c $(PROGRAMMER) -e -U flash:w:$(PRG).hex
+	avrdude -p $(MCU_TARGET) -c $(PROGRAMMER) -P $(PORT) -e -U flash:w:$(PRG).hex
 
 # enters avrdude terminal mode
 terminal:
