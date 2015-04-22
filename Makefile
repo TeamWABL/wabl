@@ -102,7 +102,7 @@ endif
 
 ############################################
 
-PROGRAMMER 	:= avrisp2
+PROGRAMMER 	:= avrispv2
 CC			:= avr-gcc
 OBJCOPY		:= avr-objcopy
 OBJDUMP		:= avr-objdump
