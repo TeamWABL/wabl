@@ -84,7 +84,10 @@ OPTIMIZE	= -Os
 #MCU_TARGET     = attiny84
 #MCU_TARGET     = attiny85
 #MCU_TARGET     = attiny861
+#MCU_TARGET		= atmega1284p
 MCU_TARGET		= atmega1284p
+
+PART			= m1284p
 
 PORT			= /dev/ttyUSB0
 
@@ -107,20 +110,23 @@ CC			:= avr-gcc
 OBJCOPY		:= avr-objcopy
 OBJDUMP		:= avr-objdump
 
-FOLDERS 	:= . $(sort $(dir $(wildcard $(SRC_FOLDER)/*/)))
+FOLDERS 	:= ./ $(sort $(dir $(wildcard $(SRC_FOLDER)/*/)))
 SRC 		:= $(foreach folder, $(FOLDERS),$(wildcard $(folder)*.c))
+I2C_DIR		:= ./libs/i2cmaster
+I2C_TRG		:= $(I2C_DIR)/i2cmaster
 
 CLEAN := *.o *.d *.hex *.map *.elf *.lst $(PRG)
-CLEAN_PATH := $(foreach folder, $(FOLDERS), $(foreach pattern, $(CLEAN), $(folder)/$(pattern)))
-
+CLEAN_PATH := $(foreach folder, $(FOLDERS), $(foreach pattern, $(CLEAN), $(folder)$(pattern)))
 
 override CFLAGS		:= -MD -MP -g -Wall -mmcu=$(MCU_TARGET) $(DEVICE_SPECIFIC_FLAGS) $(OPTIMIZE)
 override LDFLAGS	:= -Wl,-gc-sections -Wl,-Map,$(PRG).map $(DEVICE) -Wl,-relax
 
+ADDITIONAL_CLEAN := $(foreach pattern, $(CLEAN), $(I2C_DIR)/$(pattern))
+
 hex: $(PRG).hex
 
 # compiles are .c src files, but does not link them
-libs: $(SRC:%.c=%.o)
+libs: $(SRC:%.c=%.o) $(I2C_TRG).o
 
 # produces the lst file from the executable
 lst: $(PRG).lst
@@ -129,17 +135,20 @@ lst: $(PRG).lst
 clean:
 	@echo "Cleaning directories..."
 	@$(foreach path, $(CLEAN_PATH), rm -f $(path))
-
+	@$(foreach path, $(ADDITIONAL_CLEAN), rm -f $(path))
 
 # automatically complies all c files and links them
 # produces an executable with the name of $(PRG).elf
-$(PRG).elf: $(SRC:%.c=%.o)
+$(PRG).elf: $(SRC:%.c=%.o) $(I2C_TRG).o
 	$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $(PRG).elf
 
 # produces the hex frile from the executable
 %.hex: %.elf
 	$(OBJCOPY) -R .eeprom -O ihex $< $@
 
+# compiles i2c assembly code
+$(I2C_TRG).o: $(I2C_TRG).S
+	avr-gcc -c -mmcu=$(MCU_TARGET) -I. -x assembler-with-cpp -Wa,-adhlns=$(I2C_TRG).lst,-gstabs $(I2C_TRG).S -o $(I2C_TRG).o
 # produces the lst file from the executable
 %.lst: %.elf
 	$(OBJDUMP) -h -S $< > $@
@@ -155,8 +164,8 @@ endif
 
 # flashes the hex file to the chip via the pocket programmer
 flash: $(PRG).hex
-	avrdude -p $(MCU_TARGET) -c $(PROGRAMMER) -P $(PORT) -e -U flash:w:$(PRG).hex
+	avrdude -p $(PART) -c $(PROGRAMMER) -P $(PORT) -e -U flash:w:$(PRG).hex
 
 # enters avrdude terminal mode
 terminal:
-	avrdude -p $(MCU_TARGET) -c $(PROGRAMMER) -P $(PORT) -t
+	avrdude -p $(PART) -c $(PROGRAMMER) -P $(PORT) -t

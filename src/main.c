@@ -3,10 +3,10 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2015-04-21 19:58:45
+ * @edited  2015-04-22 00:45:37
  */
 
-#define F_CPU   16000000
+#define F_CPU   20000000
 #include <avr/io.h>
 #include <util/delay.h>
 #include <pololu/orangutan.h>
@@ -29,9 +29,10 @@ int main(void){
     //float uRef;
 
     //float K[4] = {-10.4113, -2.5702, -0.8970, -1.5861};
+    i2c_init();
     while(1){
-        test_motor();
-
+        test_i2c();
+        delay_ms(50);
         //led_hb();
 
         ////acquire states
