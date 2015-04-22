@@ -44,8 +44,10 @@ int main(void){
         ////calculates new current reference
         //uRef = (phi * K[0]) + (phi_dot * K[1]) + (x * K[2]) + (x_dot * K[3]);
 
-        ////pass uRef (torque) to pid motor controller
-        //motor_update_pid(uRef);
+        //pass uRef (torque) to pid motor controller
+        motor_update_pid_A(uRef);
+		motor_update_pid_B(uRef);
+        
     }
     return 0;
 }
