@@ -13,6 +13,6 @@
 
 #define XBEE    UART0
 
-void uart_init(void);
+void uart_init(int port, unsigned long baudRate);
 
 #endif //UART_H

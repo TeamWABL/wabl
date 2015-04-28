@@ -13,6 +13,7 @@
 #include <stdint.h>
 #include "io_defs.h"
 #include "modules.h"
+#include <stdio.h>
 
 //testing
 #include "test_code/test.h"
@@ -25,16 +26,18 @@ int main(void){
     //float x_dot;
     //float phi;
     //float phi_dot;
-    //
-    //float uRef = 0;
+    
+    float uRef = 0.2;
+	char print_buf[80];
 
     //float K[4] = {-10.4113, -2.5702, -0.8970, -1.5861};
     //i2c_init();
-    uart_init();
+    uart_init(XBEE, 19200UL);
+    uart_init(USB_COMM, 19200UL);
     while(1){
-        //serial_send_blocking(XBEE, "test\r\n", 6);
+        //serial_send_blocking(USB_COMM, "test\r\n", 6);
         //test_i2c();
-        //delay_ms(50);
+        delay_ms(50);
         //led_hb();
 
         ////acquire states
@@ -47,7 +50,9 @@ int main(void){
         //uRef = (phi * K[0]) + (phi_dot * K[1]) + (x * K[2]) + (x_dot * K[3]);
 
         //pass uRef (torque) to pid motor controller
-        motor_update_pid_A(.1);
+        sprintf(print_buf, "%d \n", motor_update_pid_A(uRef));
+		//sprintf(print_buf, "%d \n", 5);	
+		serial_send_blocking(XBEE, print_buf, 80);
 		//motor_update_pid_B(uRef);
         
     }

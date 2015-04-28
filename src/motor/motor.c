@@ -8,7 +8,9 @@
 
 #include <pololu/orangutan.h>
 
-void motor_update_pid_A(float torqueRef){
+int motor_update_pid_A(float torqueRef){
+	int temp = 20.2;	
+	return temp;
 	float KmA = .694;	//Need to find this value
 	int A = 0;
 	float Kp = 200;	//These need to be changed
@@ -16,7 +18,7 @@ void motor_update_pid_A(float torqueRef){
 	float Kd = 0;
 	static float ITermA_sum = 0;
 	static float DTermA1 = 0;
-	float Motor_Temp = 0;
+	static float Motor_Temp = 0;
 	
 	float currentRefA = torqueRef/KmA;
 	float errorA = currentRefA - CMD_GET_M1_CURRENT; 
@@ -27,7 +29,8 @@ void motor_update_pid_A(float torqueRef){
 	DTermA1 = errorA;
 	float Motor_Speed_A = Motor_Temp - (PTermA + ITermA + DTermA0);
 	Motor_Temp = Motor_Speed_A;
-	x2_set_motor(A,0,Motor_Speed_A);
+	//x2_set_motor(A,0,Motor_Speed_A);
+	return Motor_Speed_A;
 }
 
 void motor_update_pid_B(float torqueRef){

@@ -9,6 +9,6 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-void motor_update_pid_A(float torqueRef);
+int motor_update_pid_A(float torqueRef);
 
 #endif //MOTOR_H
