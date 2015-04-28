@@ -98,9 +98,11 @@ PORT			= /dev/ttyUSB0
 ifeq ($(MCU_TARGET),atmega328p)
 	DEVICE_SPECIFIC_FLAGS	= 
 	DEVICE					= -lpololu_atmega328p
-else ifeq ($(MCU_TARGET),atmega1284p)
+else 
+ifeq ($(MCU_TARGET),atmega1284p)
 	DEVICE_SPECIFIC_FLAGS	= -D_X2_1284
 	DEVICE					= -lpololu_atmega1284p_x2
+endif
 endif
 
 ############################################
@@ -117,7 +119,7 @@ FOLDERS 	:= ./ $(sort $(dir $(wildcard $(SRC_FOLDER)/*/)))
 SRC			:= ./src/main.c
 # Custom Modules
 SRC			+= ./src/led/led.c
-#SRC			+= ./src/motor/motor.c
+SRC			+= ./src/motor/motor.c
 SRC			+= ./src/orientation/orient.c
 SRC			+= ./src/test_code/test.c
 SRC			+= ./src/uart/uart.c

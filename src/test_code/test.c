@@ -11,12 +11,12 @@
 #include "test.h"
 
 void test_motor(void){
-    x2_set_motor(0, 0, 20);
+    x2_set_motor(0, 0, 70);
     delay_ms(200);
     x2_set_motor(0, 0xff, 20);
     delay_ms(1);
 
-    x2_set_motor(0, 0, -20);
+    x2_set_motor(0, 0, -70);
     delay_ms(200);
     x2_set_motor(0, 0xff, 255);
     delay_ms(1);
