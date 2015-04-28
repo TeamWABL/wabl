@@ -113,11 +113,15 @@ OBJDUMP		:= avr-objdump
 FOLDERS 	:= ./ $(sort $(dir $(wildcard $(SRC_FOLDER)/*/)))
 
 #SRC 		:= $(foreach folder, $(FOLDERS),$(wildcard $(folder)*.c))
+
 SRC			:= ./src/main.c
+# Custom Modules
 SRC			+= ./src/led/led.c
 #SRC			+= ./src/motor/motor.c
 SRC			+= ./src/orientation/orient.c
 SRC			+= ./src/test_code/test.c
+SRC			+= ./src/uart/uart.c
+# Libraries
 SRC			+= ./libs/avr-systimer/tmr.c
 
 I2C_DIR		:= ./libs/i2cmaster
