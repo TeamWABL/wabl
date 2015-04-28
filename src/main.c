@@ -3,7 +3,7 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2015-04-22 00:45:37
+ * @edited  2015-04-28 10:30:12
  */
 
 #define F_CPU   20000000
@@ -26,14 +26,15 @@ int main(void){
     //float phi;
     //float phi_dot;
     //
-    //float uRef = .5;
+    //float uRef = 0;
 
     //float K[4] = {-10.4113, -2.5702, -0.8970, -1.5861};
     //i2c_init();
+    uart_init();
     while(1){
+        //serial_send_blocking(XBEE, "test\r\n", 6);
         //test_i2c();
-		//test_motor();
-        delay_ms(50);
+        //delay_ms(50);
         //led_hb();
 
         ////acquire states

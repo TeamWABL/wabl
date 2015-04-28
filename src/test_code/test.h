@@ -10,5 +10,6 @@
 #define TEST_H
 
 void test_motor(void);
+void test_i2c(void);
 
 #endif //TEST_H
