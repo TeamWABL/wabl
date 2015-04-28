@@ -89,7 +89,7 @@ MCU_TARGET		= atmega1284p
 
 PART			= m1284p
 
-PORT			= /dev/ttyUSB0
+PORT			?= /dev/ttyUSB0
 
 #############################################
 #Pololu Library Settings
@@ -123,16 +123,19 @@ SRC			+= ./src/motor/motor.c
 SRC			+= ./src/orientation/orient.c
 SRC			+= ./src/test_code/test.c
 SRC			+= ./src/uart/uart.c
+#SRC			+= ./src/lqr/lqr.c
 # Libraries
 SRC			+= ./libs/avr-systimer/tmr.c
 
 I2C_DIR		:= ./libs/i2cmaster
 I2C_TRG		:= $(I2C_DIR)/i2cmaster
 
+FULL_PRINTF := -Wl,-u,vfprintf -lprintf_flt -lm
+
 CLEAN := *.o *.d *.hex *.map *.elf *.lst $(PRG)
 CLEAN_PATH := $(foreach folder, $(FOLDERS), $(foreach pattern, $(CLEAN), $(folder)$(pattern)))
 
-override CFLAGS		:= -MD -MP -g -Wall -mmcu=$(MCU_TARGET) $(DEVICE_SPECIFIC_FLAGS) $(OPTIMIZE)
+override CFLAGS		:= -MD -MP -g -Wall -mmcu=$(MCU_TARGET) $(DEVICE_SPECIFIC_FLAGS) $(FULL_PRINTF) $(OPTIMIZE)
 override LDFLAGS	:= -Wl,-gc-sections -Wl,-Map,$(PRG).map $(DEVICE) -Wl,-relax
 
 ADDITIONAL_CLEAN := $(foreach pattern, $(CLEAN), $(I2C_DIR)/$(pattern))

@@ -3,7 +3,7 @@
  * @file    uart.h
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 09:17:16
- * @edited  2015-04-28 09:48:38
+ * @edited  2015-04-28 15:58:06
  */
 
 #ifndef UART_H
@@ -13,6 +13,5 @@
 
 #define XBEE    UART0
 
-void uart_init(int port, unsigned long baudRate);
 
 #endif //UART_H

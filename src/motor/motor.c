@@ -3,13 +3,13 @@
  * @file    motor.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-26 03:49:09
- * @edited  2015-03-26 03:51:16
+ * @edited  2015-04-28 16:03:22
  */
 
 #include <pololu/orangutan.h>
 
-int motor_update_pid_A(float torqueRef){
-	int temp = 20.2;	
+double motor_update_pid_A(float torqueRef){
+	double temp = 20.2;	
 	return temp;
 	float KmA = .694;	//Need to find this value
 	int A = 0;

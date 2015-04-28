@@ -3,7 +3,7 @@
  * @file    lqr.h
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 14:23:33
- * @edited  2015-04-28 14:40:46
+ * @edited  2015-04-28 15:00:17
  */
 
 #ifndef LQR_H
