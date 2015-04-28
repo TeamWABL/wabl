@@ -98,9 +98,11 @@ PORT			= /dev/ttyUSB0
 ifeq ($(MCU_TARGET),atmega328p)
 	DEVICE_SPECIFIC_FLAGS	= 
 	DEVICE					= -lpololu_atmega328p
-else ifeq ($(MCU_TARGET),atmega1284p)
+else 
+ifeq ($(MCU_TARGET),atmega1284p)
 	DEVICE_SPECIFIC_FLAGS	= -D_X2_1284
 	DEVICE					= -lpololu_atmega1284p_x2
+endif
 endif
 
 ############################################

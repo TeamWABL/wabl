@@ -26,13 +26,12 @@ int main(void){
     //float phi;
     //float phi_dot;
     //
-    //float uRef = .5;
+    //float uRef;
 
     //float K[4] = {-10.4113, -2.5702, -0.8970, -1.5861};
-    //i2c_init();
+    i2c_init();
     while(1){
-        //test_i2c();
-		//test_motor();
+        test_i2c();
         delay_ms(50);
         //led_hb();
 
@@ -46,8 +45,8 @@ int main(void){
         //uRef = (phi * K[0]) + (phi_dot * K[1]) + (x * K[2]) + (x_dot * K[3]);
 
         //pass uRef (torque) to pid motor controller
-        motor_update_pid_A(.1);
-		//motor_update_pid_B(uRef);
+        motor_update_pid_A(uRef);
+		motor_update_pid_B(uRef);
         
     }
     return 0;
