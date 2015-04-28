@@ -111,7 +111,15 @@ OBJCOPY		:= avr-objcopy
 OBJDUMP		:= avr-objdump
 
 FOLDERS 	:= ./ $(sort $(dir $(wildcard $(SRC_FOLDER)/*/)))
-SRC 		:= $(foreach folder, $(FOLDERS),$(wildcard $(folder)*.c))
+
+#SRC 		:= $(foreach folder, $(FOLDERS),$(wildcard $(folder)*.c))
+SRC			:= ./src/main.c
+SRC			+= ./src/led/led.c
+#SRC			+= ./src/motor/motor.c
+SRC			+= ./src/orientation/orient.c
+SRC			+= ./src/test_code/test.c
+SRC			+= ./libs/avr-systimer/tmr.c
+
 I2C_DIR		:= ./libs/i2cmaster
 I2C_TRG		:= $(I2C_DIR)/i2cmaster
 
