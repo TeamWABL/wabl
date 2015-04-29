@@ -3,7 +3,7 @@
  * @file    motor.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-26 03:49:09
- * @edited  2015-04-28 16:03:22
+ * @edited  2015-04-28 20:18:02
  */
 
 #include <pololu/orangutan.h>
@@ -52,4 +52,3 @@ void motor_update_pid_B(float torqueRef){
     float Motor_Speed_B = PTermB + ITermB + DTermB0;
     x2_set_motor(B,0,Motor_Speed_B);
 }
-

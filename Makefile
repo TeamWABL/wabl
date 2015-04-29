@@ -123,7 +123,8 @@ SRC			+= ./src/motor/motor.c
 SRC			+= ./src/orientation/orient.c
 SRC			+= ./src/test_code/test.c
 SRC			+= ./src/uart/uart.c
-#SRC			+= ./src/lqr/lqr.c
+SRC			+= ./src/lqr/lqr.c
+SRC			+= ./src/encoder/encoder.c
 # Libraries
 SRC			+= ./libs/avr-systimer/tmr.c
 

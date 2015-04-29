@@ -3,10 +3,10 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2015-04-28 16:03:37
+ * @edited  2015-04-29 01:11:14
  */
 
-#define F_CPU   20000000
+#define F_CPU   20000000UL
 #include <avr/io.h>
 #include <util/delay.h>
 #include <pololu/orangutan.h>
@@ -21,29 +21,23 @@
 //testing
 
 int main(void){
-    //setup
-    //led_hb_init();
-    //float x;
-    //float x_dot;
-    //float phi;
-    //float phi_dot;
-    
-    float uRef = 0.2;
+    //float uRef = 0.2;
 	char print_buf[80];
 
-    //float K[4] = {-10.4113, -2.5702, -0.8970, -1.5861};
-    //i2c_init();
+    i2c_init();
+    uart_init();
+    encoder_init();
 
-    serial_set_baud_rate(USB_COMM, 19200UL);
-    serial_set_baud_rate(XBEE, 19200UL);
+    sei();
+
     while(1){
-        //serial_send_blocking(USB_COMM, "test\r\n", 6);
-        //test_i2c();
-        delay_ms(50);
-        //led_hb();
+        //x2_set_motor(MOTOR1, IMMEDIATE_DRIVE, 100);
 
+        double x = encoder_get_x(MOTOR1);
+        
+        //delay_ms(50);
         ////acquire states
-        //x = trans_getX();
+        //x = encoder_get_x();
         //x_dot = trans_getXDot();
         //phi = orient_getPhi();
         //phi_dot = orient_getPhiDot();
@@ -54,8 +48,9 @@ int main(void){
         //pass uRef (torque) to pid motor controller
         //double test = 23.3234;
         //sprintf(print_buf, "%d\n", 20);
-		sprintf(print_buf, "%f \n", motor_update_pid_A(1.0));	
-		serial_send_blocking(XBEE, print_buf, 80);
+		sprintf(print_buf, "%f mm\n", x);	
+		serial_send_blocking(XBEE, print_buf, sizeof(print_buf));
+		//serial_send_blocking(XBEE, "testing\n", 8);
 		//motor_update_pid_B(uRef);
         
     }
