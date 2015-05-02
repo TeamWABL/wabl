@@ -8,47 +8,76 @@
 
 #include <pololu/orangutan.h>
 
-double motor_update_pid_A(float torqueRef){
-	double temp = 20.2;	
-	return temp;
-	float KmA = .694;	//Need to find this value
-	int A = 0;
-	float Kp = 200;	//These need to be changed
+double motor_update_pid(float torqueRef,unsigned char motor){
+	//float x = x2_get_motor_current(MOTOR1);
+	//return (((x * 19.6) / .13) / 1000);
+
+	//PID Constants
+	float Kp = 200;
 	float Ki = 50;
 	float Kd = 0;
-	static float ITermA_sum = 0;
-	static float DTermA1 = 0;
-	static float Motor_Temp = 0;
+	float PTerm = 0;
+	float ITerm = 0;
+	float DTerm = 0;
+	float error = 0;
 	
-	float currentRefA = torqueRef/KmA;
-	float errorA = currentRefA - CMD_GET_M1_CURRENT; 
-	float PTermA = Kp * errorA;
-	ITermA_sum += errorA;
-	float ITermA = ITermA_sum * Ki;
-	float DTermA0 = Kd * (DTermA1-errorA);
-	DTermA1 = errorA;
-	float Motor_Speed_A = Motor_Temp - (PTermA + ITermA + DTermA0);
-	Motor_Temp = Motor_Speed_A;
-	//x2_set_motor(A,0,Motor_Speed_A);
-	return Motor_Speed_A;
-}
+	//Initializing Holding Variables
+	static float sumA = 0;
+	static float sumB = 0;
+	static float previousA = 0;
+	static float previousB = 0;
+	static float motor_temp = 100;
 
-void motor_update_pid_B(float torqueRef){
-    float KmB = 1;	//Need to find this value
-    int B = 1;
-    float Kp = 1;   //These need to be changed
-    float Ki = 1;
-    float Kd = 1;
-    static float ITermB_sum = 0;
-    static float DTermB1 = 0;
+	//Translate the current reading
+	float get_current_value(float raw){
+	return (((raw * 19.6) / .13) / 1000);
+	}
 
-    float currentRefB = torqueRef/KmB;
-    float errorB = currentRefB - CMD_GET_M2_CURRENT;
-    float PTermB = Kp * errorB;
-    ITermB_sum += errorB;
-    float ITermB = ITermB_sum * Ki;
-    float DTermB0 = Kd * (DTermB1-errorB);
-    DTermB1 = errorB;
-    float Motor_Speed_B = PTermB + ITermB + DTermB0;
-    x2_set_motor(B,0,Motor_Speed_B);
+	//Finding the error depending on the motor
+	if(motor == MOTOR1){
+		float Km = .694;
+		float currentRef = torqueRef * (1/Km);
+		float raw = x2_get_motor_current(MOTOR1);
+		float currentMeasured = get_current_value(raw);
+		error = currentRef - currentMeasured;
+		//return error;
+	}
+	else if(motor == MOTOR2){
+		float Km = .710;
+		float currentRef = torqueRef * (1/Km);
+		float raw = x2_get_motor_current(MOTOR2);
+		float currentMeasured = get_current_value(raw);
+		error = currentRef - currentMeasured;
+	}
+
+	//PID Controller
+	//Proportional
+	PTerm = Kp * error;
+
+	//Integral
+	if(motor == MOTOR1){
+		sumA += error;
+		ITerm = sumA * Ki;
+		//return ITerm;
+	}
+	else if(motor == MOTOR2){
+		sumB += error;
+		ITerm = sumB * Ki;
+	}
+
+	//Derivative
+	if(motor == MOTOR1){
+		DTerm = Kd * (error - previousA);
+		previousA = error;
+	}
+	else if(motor == MOTOR2){
+		DTerm = Kd * (error - previousB);
+		previousB = error;
+	}
+
+	//Motor
+	float motor_speed = motor_temp - (PTerm + ITerm + DTerm);
+	motor_temp = motor_speed;
+	//x2_set_motor(motor,0,motor_speed);
+	return motor_speed;
 }
