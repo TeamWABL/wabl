@@ -9,6 +9,6 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-double motor_update_pid_A(float torqueRef);
+double motor_update_pid(float torqueRef,unsigned char motor);
 
 #endif //MOTOR_H
