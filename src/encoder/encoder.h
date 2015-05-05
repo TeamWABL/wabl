@@ -3,7 +3,7 @@
  * @file    encoder.h
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 20:19:15
- * @edited  2015-04-28 23:46:12
+ * @edited  2015-04-29 01:59:14
  */
 
 #ifndef ENCODER_H

@@ -3,7 +3,7 @@
  * @file    encoder.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 20:19:10
- * @edited  2015-04-28 23:55:58
+ * @edited  2015-04-29 01:59:16
  */
 
 #include <pololu/orangutan.h>
