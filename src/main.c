@@ -21,8 +21,9 @@
 //testing
 
 int main(void){
-    float uRef = 0.01;
-	char print_buf[20];
+    float uRef = 0;
+	//char print_buf[15];
+	int counter = 0;
 
     i2c_init();
     uart_init();
@@ -31,7 +32,7 @@ int main(void){
     sei();
 
     while(1){
-        x2_set_motor(MOTOR1, IMMEDIATE_DRIVE, 100);
+        //x2_set_motor(MOTOR1, IMMEDIATE_DRIVE, 100);
 
         //double x = encoder_get_x(MOTOR1);
         
@@ -46,14 +47,13 @@ int main(void){
         //uRef = (phi * K[0]) + (phi_dot * K[1]) + (x * K[2]) + (x_dot * K[3]);
 
         //pass uRef (torque) to pid motor controller
-		float x = motor_update_pid(uRef,MOTOR1);
+		motor_update_pid(uRef,MOTOR1);
         //double test = 23.3234;
         //sprintf(print_buf, "%f\n", 20);
-		sprintf(print_buf, "%f\n", x);	
-		serial_send_blocking(XBEE, print_buf, sizeof(print_buf));
+		//sprintf(print_buf, "%f\n", x);	
+		//serial_send_blocking(XBEE, x, sizeof(x));
 		//serial_send_blocking(XBEE, "testing\n", 8);
-		//motor_update_pid_B(uRef);
-        
-    }
+		counter++;
+	}
     return 0;
 }
