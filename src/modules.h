@@ -3,7 +3,7 @@
  * @file    modules.h
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-23 01:09:46
- * @edited  2015-05- 4 23:27:47
+ * @edited  2015-05- 6 01:03:44
  */
 
 #ifndef MODULES_H
@@ -18,7 +18,6 @@
 #include "uart/uart.h"
 #include "lqr/lqr.h"
 #include "encoder/encoder.h"
-#include "myi2c/myi2c.h"
 
 /******************************************************************************/
 /* Local Libraries                                                            */

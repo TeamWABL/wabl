@@ -3,7 +3,7 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2015-04-29 01:11:14
+ * @edited  2015-05- 6 00:22:08
  */
 
 #define F_CPU   20000000UL
@@ -11,6 +11,7 @@
 #include <util/delay.h>
 #include <pololu/orangutan.h>
 #include <stdint.h>
+#include <string.h>
 #include <stdio.h>
 
 #include "io_defs.h"
@@ -21,22 +22,23 @@
 //testing
 
 int main(void){
-    float uRef = 0;
-	//char print_buf[15];
-	int counter = 0;
+    //float uRef = 0.01;
+	char print_buf[20];
 
-    i2c_init();
+    orient_init();
     uart_init();
-    encoder_init();
+    //encoder_init();
 
     sei();
 
     while(1){
+        memset(print_buf, 0, 20);
+        int16_t phi_dot = orient_get_phi_dot_raw();
         //x2_set_motor(MOTOR1, IMMEDIATE_DRIVE, 100);
 
         //double x = encoder_get_x(MOTOR1);
         
-        delay_ms(5);
+        //delay_ms(5);
         ////acquire states
         //x = encoder_get_x();
         //x_dot = trans_getXDot();
@@ -53,7 +55,7 @@ int main(void){
 		//sprintf(print_buf, "%f\n", x);	
 		//serial_send_blocking(XBEE, x, sizeof(x));
 		//serial_send_blocking(XBEE, "testing\n", 8);
-		counter++;
-	}
+        
+    }
     return 0;
 }
