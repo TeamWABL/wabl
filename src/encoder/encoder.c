@@ -3,14 +3,15 @@
  * @file    encoder.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 20:19:10
- * @edited  2015-04-29 01:59:16
+ * @edited  2015-05- 7 02:02:31
  */
 
 #include <pololu/orangutan.h>
 
 #include "encoder.h"
 
-double count2mmeter = 0.540288486570;
+//(pi*156mm)/720 pulses
+double count2mmeter = 0.680678408277789;
 
 void encoder_init(void){
     //TODO rearrange to get expect forward and backward values
@@ -35,6 +36,6 @@ int encoder_get_x_raw(unsigned char motor){
 
 double encoder_get_x(unsigned char motor){
     int count = encoder_get_x_raw(motor);
-    double meters = count2mmeter * count;
-    return meters;
+    double x = count2mmeter * count;
+    return x;
 }
