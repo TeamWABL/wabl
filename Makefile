@@ -182,7 +182,7 @@ endif
 
 # flashes the hex file to the chip via the pocket programmer
 flash: $(PRG).hex
-	avrdude -v -v -v -v -p $(PART) -c $(PROGRAMMER) -P $(PORT) -e -U flash:w:$(PRG).hex
+	avrdude -v -v -v -v -p $(PART) -c $(PROGRAMMER) -P $(PORT) -B 276.7 -e -U flash:w:$(PRG).hex
 
 # enters avrdude terminal mode
 terminal:

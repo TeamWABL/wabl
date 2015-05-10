@@ -3,7 +3,7 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2015-05- 6 00:22:08
+ * @edited  2015-05-10 16:04:28
  */
 
 #define F_CPU   20000000UL
@@ -22,18 +22,50 @@
 //testing
 
 int main(void){
-    //float uRef = 0.01;
-	char print_buf[20];
+    //uart setup
+
+    uart_init();
+	char print_buf[120];
+
+    serial_send_blocking(XBEE, "Initializing UART...", 20);
+    serial_send_blocking(XBEE, "done.\n", 6);
+
+    // timer setup
+    serial_send_blocking(XBEE, "Initializing Timer...", 21);
+
+    sysT_init();
+
+    sysTimer16_t print_timer;
+    sysT_16_init(&print_timer);
+
+    serial_send_blocking(XBEE, "done.\n", 6);
+
+
+    //state acquisition setup
+    serial_send_blocking(XBEE, "Initializing state acquisition...", 33);
+    double phi;
+    double phi_raw;
+    double phi_dot;
+    double phi_dot_raw;
 
     orient_init();
-    uart_init();
     //encoder_init();
+
+    serial_send_blocking(XBEE, "done.\n", 6);
 
     sei();
 
+
     while(1){
-        memset(print_buf, 0, 20);
-        int16_t phi_dot = orient_get_phi_dot_raw();
+        memset(print_buf, 0, 120);
+
+        phi = orient_get_phi();
+        phi_raw = orient_get_phi_raw();
+        phi_dot = orient_get_phi_dot();
+        phi_dot_raw = orient_get_phi_dot_raw();
+        
+        
+        
         //x2_set_motor(MOTOR1, IMMEDIATE_DRIVE, 100);
 
         //double x = encoder_get_x(MOTOR1);
@@ -52,12 +84,25 @@ int main(void){
 		//float x = motor_update_pid(uRef,MOTOR1);
         //double test = 23.3234;
         //sprintf(print_buf, "%f\n", 20);
-		sprintf(print_buf, "%d\n", phi_dot);	
+        //sprintf(print_buf, "%f mm\n", x);
+		sprintf(print_buf, "phi = %10f, phi_raw = %10f, phi_dot = %10f, phi_dot_raw = %10f\n", phi, phi_raw, phi_dot, phi_dot_raw);	
+		//sprintf(print_buf, "%f\n", phi_dot_raw);	
 		serial_send_blocking(XBEE, print_buf, sizeof(print_buf));
 		//serial_send_blocking(XBEE, "testing\n", sizeof("testing\n"));
-        delay_ms(50);
+        delay_ms(25);
 		//motor_update_pid_B(uRef);
         
     }
     return 0;
+}
+
+//1ms timer interrupt
+ISR(TIMER1_COMPA_vect){
+    static uint8_t orient_update_tmr;
+    if (++orient_update_tmr == 10){
+        orient_update_tmr = 0;
+        orient_update(5);
+    }
+
+    //sysT_timer_service();
 }
