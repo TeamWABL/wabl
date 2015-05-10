@@ -125,6 +125,7 @@ SRC			+= ./src/test_code/test.c
 SRC			+= ./src/uart/uart.c
 SRC			+= ./src/lqr/lqr.c
 SRC			+= ./src/encoder/encoder.c
+SRC			+= ./src/safety/safety.c
 # Libraries
 SRC			+= ./libs/avr-systimer/tmr.c
 
