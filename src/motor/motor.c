@@ -7,61 +7,89 @@
  */
 
 #include <pololu/orangutan.h>
+#include <stdio.h>
+
+//PID Multipliers
+float Kp = 100;
+float Ki = 0;
+float Kd = 0;
+
+//Initializing PID terms
+float PTerm = 0;
+float ITerm = 0;
+float DTerm = 0;
+
+//Variables used to find current error
+float Km = 0;
+float currentRef = 0;
+float currentMeasured = 0;
+float error = 0;
+float raw = 0;
+
+//Max and min vals
+float max_val = 255;
+float min_val = -255;
+
+//Motor
+float motor_speed = 0;
 
 double motor_update_pid(float torqueRef,unsigned char motor){
-	//float x = x2_get_motor_current(MOTOR1);
-	//return (((x * 19.6) / .13) / 1000);
 
-	//PID Constants
-	float Kp = 200;
-	float Ki = 50;
-	float Kd = 0;
-	float PTerm = 0;
-	float ITerm = 0;
-	float DTerm = 0;
-	float error = 0;
-	
-	//Initializing Holding Variables
+	//Initializing holding variables
 	static float sumA = 0;
 	static float sumB = 0;
 	static float previousA = 0;
 	static float previousB = 0;
-	static float motor_temp = 100;
 
-	//Translate the current reading
+	//Printing buffer for testing 	
+	char print_buf[150];
+	float measured_torque = 0;
+
+	//Translate the current reading to amps
 	float get_current_value(float raw){
-	return (((raw * 19.6) / .13) / 1000);
+		return (((raw * 19.6) / .13) / 1000);
 	}
 
 	//Finding the error depending on the motor
 	if(motor == MOTOR1){
-		float Km = .694;
-		float currentRef = torqueRef * (1/Km);
-		float raw = x2_get_motor_current(MOTOR1);
-		float currentMeasured = get_current_value(raw);
-		error = currentRef - currentMeasured;
-		//return error;
+		Km = .694;
+		currentRef = torqueRef/Km;
+		raw = x2_get_motor_current(MOTOR1);
+		currentMeasured = get_current_value(raw);
+		error = currentRef - (currentMeasured);
+		measured_torque = currentMeasured * Km;
 	}
 	else if(motor == MOTOR2){
-		float Km = .710;
-		float currentRef = torqueRef * (1/Km);
-		float raw = x2_get_motor_current(MOTOR2);
-		float currentMeasured = get_current_value(raw);
+		Km = .710;
+		currentRef = torqueRef/Km;
+		raw = x2_get_motor_current(MOTOR2);
+		currentMeasured = get_current_value(raw);
 		error = currentRef - currentMeasured;
 	}
 
 	//PID Controller
-	//Proportional
+	//Proportionl
 	PTerm = Kp * error;
 
 	//Integral
 	if(motor == MOTOR1){
 		sumA += error;
+		if(sumA > max_val){
+			sumA = max_val;
+		}
+		else if(sumA < min_val){
+			sumA = min_val;
+		}
 		ITerm = sumA * Ki;
-		//return ITerm;
 	}
 	else if(motor == MOTOR2){
 		sumB += error;
+		if(sumB > max_val){
+			sumB = max_val;
+		}
+		else if(sumB < min_val){
+			sumB = min_val;
+		}
 		ITerm = sumB * Ki;
 	}
 
@@ -76,8 +104,19 @@ double motor_update_pid(float torqueRef,unsigned char motor){
 	}
 
 	//Motor
-	float motor_speed = motor_temp - (PTerm + ITerm + DTerm);
-	motor_temp = motor_speed;
-	//x2_set_motor(motor,0,motor_speed);
-	return motor_speed;
+	motor_speed = (PTerm + ITerm + DTerm);
+	if(motor_speed > max_val){
+		motor_speed = max_val;
+	}
+	else if(motor_speed < min_val){
+		motor_speed = min_val;
+	}
+	//sprintf(print_buf, "Torque input = %f Current desired = %f Current measured %f error = %f Motor speed = %f Measured Torque = %f\n ", torqueRef, currentRef, currentMeasured, error, motor_speed, measured_torque);
+	//serial_send_blocking(UART0, print_buf, sizeof(print_buf));
+	x2_set_motor(motor, IMMEDIATE_DRIVE, motor_speed);
+	return 0;
 }
+
+
+
+

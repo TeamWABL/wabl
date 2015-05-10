@@ -3,7 +3,7 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2015-05-10 16:04:28
+ * @edited  2015-05-10 16:53:33
  */
 
 #define F_CPU   20000000UL
@@ -81,7 +81,7 @@ int main(void){
         //uRef = (phi * K[0]) + (phi_dot * K[1]) + (x * K[2]) + (x_dot * K[3]);
 
         //pass uRef (torque) to pid motor controller
-		//float x = motor_update_pid(uRef,MOTOR1);
+		motor_update_pid(uRef,MOTOR1);
         //double test = 23.3234;
         //sprintf(print_buf, "%f\n", 20);
         //sprintf(print_buf, "%f mm\n", x);
@@ -91,7 +91,6 @@ int main(void){
 		//serial_send_blocking(XBEE, "testing\n", sizeof("testing\n"));
         delay_ms(25);
 		//motor_update_pid_B(uRef);
-        
     }
     return 0;
 }
