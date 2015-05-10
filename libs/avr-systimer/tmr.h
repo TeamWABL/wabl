@@ -3,7 +3,7 @@
  * @file    tmr.h
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-20 20:47:14
- * @edited  2015-04-28 01:04:01
+ * @edited  2015-05- 7 01:26:24
  */
 
 #ifndef TMR_H
@@ -15,7 +15,7 @@
 /* Defines number of 8, 16, 32 bit timers
  * To save space, adjust to actual number of timers
  */
-#define MAX_8_TIMERS    4
+#define MAX_8_TIMERS    0
 #define MAX_16_TIMERS   4
 //#define MAX_32_TIMERS   2
 
@@ -38,6 +38,7 @@ typedef struct sysTimer16_t{
  * @brief Initialize timer hardware and timer arrays
  */
 void sysT_init(void);
+void sysT_timer_service(void);
 
 /* 8 bit timer functions */
 void sysT_8_init(sysTimer8_t *timer);

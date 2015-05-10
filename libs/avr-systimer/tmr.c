@@ -3,7 +3,7 @@
  * @file    tmr.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-20 20:47:09
- * @edited  2015-04-28 08:42:34
+ * @edited  2015-05- 7 01:26:26
  */
 
 #include <avr/io.h>
@@ -83,7 +83,12 @@ void sysT_init(void){
     OCR0A = 250;        //set Timer0 to CompA every 1ms
     TIMSK0 = 1<<OCIE0A;  //enables Timer0 Compare A Interrupt
 #elif defined (__AVR_ATmega1284P__)
-    //insert timer regs for 1284p
+    TCCR1B = 1<<WGM12 | 1<<CS11;  //sets Timer1 to CTC mode
+    //set compare match A = 2500 @ 1ms
+    OCR1AH = 0x09;
+    OCR1AL = 0xC4;
+    //enable compa interrupt
+    TIMSK1 = 1<<OCIE1A;
 #endif
 }
 
@@ -156,9 +161,9 @@ uint16_t sysT_16_get_ticks(sysTimer16_t *timer){
 //    return ret;
 //}
 
-/* ISR */
-ISR(TIMER0_COMPA_vect){
-    cli();
-    sysT_timer_service();
-    sei();
-}
+///* ISR */
+//ISR(TIMER0_COMPA_vect){
+//    cli();
+//    sysT_timer_service();
+//    sei();
+//}
