@@ -3,7 +3,7 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2015-05-10 20:23:59
+ * @edited  2015-05-10 20:54:40
  */
 
 #define F_CPU   20000000UL
@@ -49,7 +49,7 @@ int main(void){
     double phi_dot_raw;
 
     orient_init();
-    //encoder_init();
+    encoder_init();
 
     serial_send_blocking(XBEE, "done.\n", 6);
 
@@ -67,9 +67,10 @@ int main(void){
             
             
             
-            //x2_set_motor(MOTOR1, IMMEDIATE_DRIVE, 100);
+            //x2_set_motor(MOTOR2, IMMEDIATE_DRIVE, 100);
+            //x2_set_motor(MOTOR2, IMMEDIATE_DRIVE, 100);
 
-            //double x = encoder_get_x(MOTOR1);
+            double x = encoder_get_x(MOTOR1);
             
             //delay_ms(5);
             ////acquire states
@@ -85,8 +86,8 @@ int main(void){
             //motor_update_pid(uRef,MOTOR1);
             //double test = 23.3234;
             //sprintf(print_buf, "%f\n", 20);
-            //sprintf(print_buf, "%f mm\n", x);
-            sprintf(print_buf, "phi = %10f, phi_raw = %10f, phi_dot = %10f, phi_dot_raw = %10f\n", phi, phi_raw, phi_dot, phi_dot_raw);	
+            sprintf(print_buf, "%f mm\n", x);
+            //sprintf(print_buf, "phi = %10f, phi_raw = %10f, phi_dot = %10f, phi_dot_raw = %10f\n", phi, phi_raw, phi_dot, phi_dot_raw);	
             //sprintf(print_buf, "%f\n", phi_dot_raw);	
             serial_send_blocking(XBEE, print_buf, sizeof(print_buf));
             //serial_send_blocking(XBEE, "testing\n", sizeof("testing\n"));
