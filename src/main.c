@@ -3,7 +3,7 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2015-05-10 19:15:59
+ * @edited  2015-05-10 20:23:59
  */
 
 #define F_CPU   20000000UL
@@ -94,6 +94,10 @@ int main(void){
             //motor_update_pid_B(uRef);
         }else{
             //play game over
+            sound_play_melody(BATTERY_CRITICAL);
+            while(is_playing());
+            cli();
+            break;
         }
     }
     return 0;

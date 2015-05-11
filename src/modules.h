@@ -3,7 +3,7 @@
  * @file    modules.h
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-23 01:09:46
- * @edited  2015-05-10 19:07:09
+ * @edited  2015-05-10 20:12:39
  */
 
 #ifndef MODULES_H
@@ -19,6 +19,7 @@
 #include "lqr/lqr.h"
 #include "encoder/encoder.h"
 #include "safety/safety.h"
+#include "sound/sound.h"
 
 /******************************************************************************/
 /* Local Libraries                                                            */

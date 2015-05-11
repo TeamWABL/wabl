@@ -126,6 +126,7 @@ SRC			+= ./src/uart/uart.c
 SRC			+= ./src/lqr/lqr.c
 SRC			+= ./src/encoder/encoder.c
 SRC			+= ./src/safety/safety.c
+SRC			+= ./src/sound/sound.c
 # Libraries
 SRC			+= ./libs/avr-systimer/tmr.c
 
