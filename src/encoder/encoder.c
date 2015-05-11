@@ -3,7 +3,7 @@
  * @file    encoder.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 20:19:10
- * @edited  2015-05-10 20:59:59
+ * @edited  2015-05-10 21:39:35
  */
 
 #include <pololu/orangutan.h>
@@ -13,29 +13,80 @@
 //(pi*156mm)/720 pulses
 double count2mmeter = 0.680678408277789;
 
+//motor A/1 variables
+double a_x_raw;
+double a_x;
+double a_x_dot_raw;
+double a_x_dot;
+double a_previous_x_raw;
+
+//motor B/2 variables
+double b_x_raw;
+double b_x;
+double b_x_dot_raw;
+double b_x_dot;
+double b_previous_x_raw;
+
 void encoder_init(void){
     //sets which io pins correspone to which motors/phases
     encoders_init(IO_D5, IO_D4, IO_D6, IO_D7);
+
+    //motor A/1 variables
+    a_x_raw = 0;
+    a_x = 0;
+    a_x_dot_raw = 0;
+    a_x_dot = 0;
+    a_previous_x_raw = 0;
+
+    //motor B/2 variables
+    b_x_raw = 0;
+    b_x = 0;
+    b_x_dot_raw = 0;
+    b_x_dot = 0;
+    b_previous_x_raw = 0;
 }
 
-int encoder_get_x_raw(unsigned char motor){
-    int count = 0;
+void encoder_update(uint8_t delta_t_ms){
+    //save previous values
+    a_previous_x_raw = a_x_raw;
+    b_previous_x_raw = b_x_raw;
 
-    switch (motor){
-        case MOTOR1:
-            count = encoders_get_counts_m1();
-            break;
-        case MOTOR2:
-            count = encoders_get_counts_m2();
-            break;
-        default:
-            break;
-    }
-    return count;
+    //get new x values
+    a_x_raw = encoders_get_counts_m1();
+    b_x_raw = encoders_get_counts_m2();
+
+    //convert new x values to millimeters
+    a_x = a_x_raw * count2mmeter;
+    b_x = b_x_raw * count2mmeter;
+
+    //calculate raw velocities
+    //multiply by 1000 to account for milliseconds (results in ticks/second)
+    a_x_dot_raw = (((a_x_raw - a_previous_x_raw) * 1000) / delta_t_ms);
+    b_x_dot_raw = (((b_x_raw - b_previous_x_raw) * 1000) / delta_t_ms);
+
+    //conver new velocities to millimeters/second
+    a_x_dot = a_x_dot_raw * count2mmeter;
+    b_x_dot = b_x_dot_raw * count2mmeter;
 }
 
 double encoder_get_x(unsigned char motor){
-    int count = encoder_get_x_raw(motor);
-    double x = count2mmeter * count;
-    return x;
+    if (motor == MOTOR1){
+        return a_x;
+    }else if (motor == MOTOR2){
+        return b_x;
+    }
+    else{
+        return 0;
+    }
+}
+
+double encoder_get_x_dot(unsigned char motor){
+    if (motor == MOTOR1){
+        return a_x_dot;
+    }else if (motor == MOTOR2){
+        return b_x_dot;
+    }
+    else{
+        return 0;
+    }
 }

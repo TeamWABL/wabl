@@ -3,7 +3,7 @@
  * @file    orient.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-24 10:19:19
- * @edited  2015-05-10 16:49:03
+ * @edited  2015-05-10 21:03:44
  */
 
 #define F_CPU   20000000
@@ -30,7 +30,6 @@ double phi;
 double phi_dot_raw;
 double phi_dot;
 double previous_phi_dot_raw;
-double previous_phi_dot;
 
 /**********************************
  * Library Functions
@@ -57,7 +56,6 @@ void orient_init(void){
     phi_dot_raw = 0;
     phi_dot = 0;
     previous_phi_dot_raw = 0;
-    previous_phi_dot = 0;
 }
 
 void orient_calibrate(void){
@@ -87,7 +85,6 @@ void orient_calibrate(void){
 void orient_update(uint8_t delta_t_ms){
     //store previous values
     previous_phi_dot_raw = phi_dot_raw;
-    previous_phi_dot = phi_dot;
 
     //calculate new phi_dot
     //read gyro value and apply bias offset
