@@ -3,7 +3,7 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2015-05-10 21:51:09
+ * @edited  2015-05-11 00:10:07
  */
 
 #define F_CPU   20000000UL
@@ -56,6 +56,15 @@ int main(void){
 
     serial_send_blocking(XBEE, "done.\n", 6);
 
+    //lqr setup
+    //position to track to in millimeters
+    double positionRef_mm = 0;
+    double a_torqueRef;
+    double b_torqueRef;
+
+    int16_t a_motor_speed;
+    int16_t b_motor_speed;
+
     sei();
 
 
@@ -73,7 +82,16 @@ int main(void){
 
             b_x = encoder_get_x(MOTOR2);
             b_x_dot = encoder_get_x_dot(MOTOR2);
-            
+
+            a_torqueRef = lqr(positionRef_mm, a_x, a_x_dot, phi, phi_dot);
+            b_torqueRef = lqr(positionRef_mm, b_x, b_x_dot, phi, phi_dot);
+
+            a_motor_speed = motor_pid(a_torqueRef, MOTOR1);
+            b_motor_speed = motor_pid(b_torqueRef, MOTOR2);
+
+            x2_set_motor(MOTOR1, IMMEDIATE_DRIVE, a_motor_speed);
+            x2_set_motor(MOTOR2, IMMEDIATE_DRIVE, a_motor_speed);
+
             //delay_ms(5);
             ////acquire states
             //x = encoder_get_x();
@@ -91,9 +109,11 @@ int main(void){
             //sprintf(print_buf, "%f mm\t%f mm/s\n", x, v);
             //sprintf(print_buf, "phi = %10f, phi_raw = %10f, phi_dot = %10f, phi_dot_raw = %10f\n", phi, phi_raw, phi_dot, phi_dot_raw);	
             //sprintf(print_buf, "%f\n", phi_dot_raw);	
-            serial_send_blocking(XBEE, print_buf, sizeof(print_buf));
+            //sprintf(print_buf, "A:%10f\tB:%10f\n", a_torqueRef, b_torqueRef);	
+            //sprintf(print_buf, "A:%10d\tB:%10d\n", a_motor_speed, b_motor_speed);	
+            //sprintf(print_buf, "Phi: %10f\tX: %10f\tTorque: %10f\tSpeed: %10d\n", phi, a_x, a_torqueRef, a_motor_speed);
+            //serial_send_blocking(XBEE, print_buf, sizeof(print_buf));
             //serial_send_blocking(XBEE, "testing\n", sizeof("testing\n"));
-            delay_ms(25);
             //motor_update_pid_B(uRef);
         }else{
             //play game over
