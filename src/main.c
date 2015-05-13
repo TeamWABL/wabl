@@ -3,7 +3,7 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2015-05-11 00:10:07
+ * @edited  2015-05-13 17:30:54
  */
 
 #define F_CPU   20000000UL
@@ -67,7 +67,6 @@ int main(void){
 
     sei();
 
-
     while(1){
         if (!safety_battery_critical()){
             //clear print buf
@@ -89,37 +88,25 @@ int main(void){
             a_motor_speed = motor_pid(a_torqueRef, MOTOR1);
             b_motor_speed = motor_pid(b_torqueRef, MOTOR2);
 
+            //set motors
             x2_set_motor(MOTOR1, IMMEDIATE_DRIVE, a_motor_speed);
             x2_set_motor(MOTOR2, IMMEDIATE_DRIVE, a_motor_speed);
 
-            //delay_ms(5);
-            ////acquire states
-            //x = encoder_get_x();
-            //x_dot = trans_getXDot();
-            //phi = orient_getPhi();
-            //phi_dot = orient_getPhiDot();
-
-            ////calculates new current reference
-            //uRef = (phi * K[0]) + (phi_dot * K[1]) + (x * K[2]) + (x_dot * K[3]);
-
-            //pass uRef (torque) to pid motor controller
-            //motor_update_pid(uRef,MOTOR1);
-            //double test = 23.3234;
-            //sprintf(print_buf, "%f\n", 20);
-            //sprintf(print_buf, "%f mm\t%f mm/s\n", x, v);
             //sprintf(print_buf, "phi = %10f, phi_raw = %10f, phi_dot = %10f, phi_dot_raw = %10f\n", phi, phi_raw, phi_dot, phi_dot_raw);	
-            //sprintf(print_buf, "%f\n", phi_dot_raw);	
+            //sprintf(print_buf, "%f\n", phi);	
             //sprintf(print_buf, "A:%10f\tB:%10f\n", a_torqueRef, b_torqueRef);	
             //sprintf(print_buf, "A:%10d\tB:%10d\n", a_motor_speed, b_motor_speed);	
-            //sprintf(print_buf, "Phi: %10f\tX: %10f\tTorque: %10f\tSpeed: %10d\n", phi, a_x, a_torqueRef, a_motor_speed);
-            //serial_send_blocking(XBEE, print_buf, sizeof(print_buf));
+            sprintf(print_buf, "Phi: %10f\tX: %10f\tTorque: %10f\tSpeed: %10d\n", phi, a_x, a_torqueRef, a_motor_speed);
+            serial_send_blocking(XBEE, print_buf, sizeof(print_buf));
             //serial_send_blocking(XBEE, "testing\n", sizeof("testing\n"));
             //motor_update_pid_B(uRef);
         }else{
-            //play game over
+            //player critical battery melody
             sound_play_melody(BATTERY_CRITICAL);
+            //wait for the melody to finish playing
             while(is_playing());
             cli();
+            //exit infinite loop
             break;
         }
     }
@@ -129,7 +116,7 @@ int main(void){
 //1ms timer interrupt
 ISR(TIMER1_COMPA_vect){
     static uint8_t orient_update_tmr;
-    if (++orient_update_tmr == 10){
+    if (++orient_update_tmr == 5){
         orient_update_tmr = 0;
         orient_update(5);
         encoder_update(5);

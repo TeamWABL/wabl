@@ -127,8 +127,10 @@ SRC			+= ./src/lqr/lqr.c
 SRC			+= ./src/encoder/encoder.c
 SRC			+= ./src/safety/safety.c
 SRC			+= ./src/sound/sound.c
+SRC			+= ./src/communication/comm.c
 # Libraries
 SRC			+= ./libs/avr-systimer/tmr.c
+SRC			+= ./libs/ringbuffer/ringbuffer.c
 
 I2C_DIR		:= ./libs/i2cmaster
 I2C_TRG		:= $(I2C_DIR)/i2cmaster
@@ -184,7 +186,7 @@ endif
 
 # flashes the hex file to the chip via the pocket programmer
 flash: $(PRG).hex
-	avrdude -v -v -v -v -p $(PART) -c $(PROGRAMMER) -P $(PORT) -B 267.7 -e -U flash:w:$(PRG).hex
+	avrdude -v -v -v -v -p $(PART) -c $(PROGRAMMER) -P $(PORT) -B 50 -e -U flash:w:$(PRG).hex
 
 # enters avrdude terminal mode
 terminal:
