@@ -22,22 +22,25 @@ double ITerm = 0;
 double DTerm = 0;
 
 //Variables used to find current error
-double Km = 0;
-double currentRef = 0;
-double currentMeasured = 0;
-double error = 0;
-double raw = 0;
+double Km = 0;	//motor constant
+double currentRef = 0;	//desired current value
+double currentMeasured = 0;	//measured current value
+double error = 0;	//calculated error
+double raw = 0;	//raw value returned by x2_get_motor_current
 
 //Max and min vals
 double max_val = 255;
 double min_val = -255;
 
-//Motor
+//Motor Speed value
 int16_t motor_speed = 0;
 
+//PID control program for the motors
+//Inputs are a torque and which motor
+//Output is a speed
 double motor_pid(double torqueRef,unsigned char motor){
 
-	//Initializing holding variables
+	//Initializing holding variables of integral and derivative terms
 	static double sumA = 0;
 	static double sumB = 0;
 	static double previousA = 0;
@@ -49,6 +52,7 @@ double motor_pid(double torqueRef,unsigned char motor){
 
 
 	//Finding the error depending on the motor
+	//MOTOR1
 	if(motor == MOTOR1){
 		Km = .694;
 		currentRef = torqueRef/Km;
@@ -57,6 +61,7 @@ double motor_pid(double torqueRef,unsigned char motor){
 		error = currentRef - (currentMeasured);
 		//measured_torque = currentMeasured * Km;
 	}
+	//MOTOR2
 	else if(motor == MOTOR2){
 		Km = .710;
 		currentRef = torqueRef/Km;
@@ -66,6 +71,7 @@ double motor_pid(double torqueRef,unsigned char motor){
 	}
 
 	//PID Controller
+
 	//Proportionl
 	PTerm = Kp * error;
 
@@ -101,7 +107,7 @@ double motor_pid(double torqueRef,unsigned char motor){
 		previousB = error;
 	}
 
-	//Motor
+	//Setting the motor speed
 	motor_speed = (PTerm + ITerm + DTerm);
 	if(motor_speed > max_val){
 		motor_speed = max_val;
