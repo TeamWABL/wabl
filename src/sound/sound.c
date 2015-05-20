@@ -1,9 +1,9 @@
-/**
+/*
  * 
  * @file    sound.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-05-10 19:45:57
- * @edited  2015-05-10 20:29:40
+ * @edited  2015-05-19 21:05:05
  */
 
 #include <pololu/orangutan.h>

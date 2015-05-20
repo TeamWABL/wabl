@@ -1,9 +1,9 @@
-/**
+/*
  * WABL's safety module
  * @file    safety.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-05-10 17:01:12
- * @edited  2015-05-10 19:41:15
+ * @edited  2015-05-19 21:03:06
  */
 
 #include "safety.h"

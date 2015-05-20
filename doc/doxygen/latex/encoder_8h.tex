@@ -1,0 +1,83 @@
+\hypertarget{encoder_8h}{\section{encoder.\-h File Reference}
+\label{encoder_8h}\index{encoder.\-h@{encoder.\-h}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{encoder_8h_ab885d9bad57d89e5f53eb590dc3d6011}{void \hyperlink{encoder_8h_ab885d9bad57d89e5f53eb590dc3d6011}{encoder\-\_\-init} (void)}\label{encoder_8h_ab885d9bad57d89e5f53eb590dc3d6011}
+
+\begin{DoxyCompactList}\small\item\em Setup encoder pins, must be called once. \end{DoxyCompactList}\item 
+void \hyperlink{encoder_8h_aa0d018d213acf1ae4a9308fce2f61ad5}{encoder\-\_\-update} (uint8\-\_\-t delta\-\_\-t\-\_\-ms)
+\begin{DoxyCompactList}\small\item\em Calculate new position (x) and velocity (x\-\_\-dot) values. \end{DoxyCompactList}\item 
+double \hyperlink{encoder_8h_afb96b21d172eaf582f3737e2f940660c}{encoder\-\_\-get\-\_\-x} (unsigned char motor)
+\begin{DoxyCompactList}\small\item\em Get position (x) for specified motor in millimeters. \end{DoxyCompactList}\item 
+double \hyperlink{encoder_8h_a41862eed45667511fd77cf09d99afbe8}{encoder\-\_\-get\-\_\-x\-\_\-dot} (unsigned char motor)
+\begin{DoxyCompactList}\small\item\em Get velocity (x\-\_\-dot) for specified motor in millimeters/second. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Motor quadrature encoder module
+
+\begin{DoxyAuthor}{Author}
+Stephen Papierski \href{mailto:stephenpapierski@gmail.com}{\tt stephenpapierski@gmail.\-com} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015-\/04-\/28 20\-:19\-:15  2015-\/05-\/19 22\-:13\-:38 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{encoder_8h_afb96b21d172eaf582f3737e2f940660c}{\index{encoder.\-h@{encoder.\-h}!encoder\-\_\-get\-\_\-x@{encoder\-\_\-get\-\_\-x}}
+\index{encoder\-\_\-get\-\_\-x@{encoder\-\_\-get\-\_\-x}!encoder.h@{encoder.\-h}}
+\subsubsection[{encoder\-\_\-get\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}double encoder\-\_\-get\-\_\-x (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{motor}
+\end{DoxyParamCaption}
+)}}\label{encoder_8h_afb96b21d172eaf582f3737e2f940660c}
+
+
+Get position (x) for specified motor in millimeters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em motor} & M\-O\-T\-O\-R1 or M\-O\-T\-O\-R2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+position (x) in millimeters 
+\end{DoxyReturn}
+\hypertarget{encoder_8h_a41862eed45667511fd77cf09d99afbe8}{\index{encoder.\-h@{encoder.\-h}!encoder\-\_\-get\-\_\-x\-\_\-dot@{encoder\-\_\-get\-\_\-x\-\_\-dot}}
+\index{encoder\-\_\-get\-\_\-x\-\_\-dot@{encoder\-\_\-get\-\_\-x\-\_\-dot}!encoder.h@{encoder.\-h}}
+\subsubsection[{encoder\-\_\-get\-\_\-x\-\_\-dot}]{\setlength{\rightskip}{0pt plus 5cm}double encoder\-\_\-get\-\_\-x\-\_\-dot (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{motor}
+\end{DoxyParamCaption}
+)}}\label{encoder_8h_a41862eed45667511fd77cf09d99afbe8}
+
+
+Get velocity (x\-\_\-dot) for specified motor in millimeters/second. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em motor} & M\-O\-T\-O\-R1 or M\-O\-T\-O\-R2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+velocity (x) in millimeters/second 
+\end{DoxyReturn}
+\hypertarget{encoder_8h_aa0d018d213acf1ae4a9308fce2f61ad5}{\index{encoder.\-h@{encoder.\-h}!encoder\-\_\-update@{encoder\-\_\-update}}
+\index{encoder\-\_\-update@{encoder\-\_\-update}!encoder.h@{encoder.\-h}}
+\subsubsection[{encoder\-\_\-update}]{\setlength{\rightskip}{0pt plus 5cm}void encoder\-\_\-update (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{delta\-\_\-t\-\_\-ms}
+\end{DoxyParamCaption}
+)}}\label{encoder_8h_aa0d018d213acf1ae4a9308fce2f61ad5}
+
+
+Calculate new position (x) and velocity (x\-\_\-dot) values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta\-\_\-t\-\_\-ms} & Time difference since last call in milliseconds \\
+\hline
+\end{DoxyParams}

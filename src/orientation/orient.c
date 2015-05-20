@@ -1,9 +1,9 @@
-/**
+/*
  * Orientation module for use with the Pololu AltIMU-10 v4
  * @file    orient.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-24 10:19:19
- * @edited  2015-05-10 21:03:44
+ * @edited  2015-05-19 20:54:41
  */
 
 #define F_CPU   20000000

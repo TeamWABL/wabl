@@ -3,7 +3,7 @@
  * @file    modules.h
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-23 01:09:46
- * @edited  2015-05-13 18:19:45
+ * @edited  2015-05-19 21:12:04
  */
 
 #ifndef MODULES_H
@@ -12,7 +12,6 @@
 /******************************************************************************/
 /* Custom Modules                                                             */
 /******************************************************************************/
-#include "led/led.h"
 #include "motor/motor.h"
 #include "orientation/orient.h"
 #include "uart/uart.h"

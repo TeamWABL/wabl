@@ -1,9 +1,9 @@
-/**
+/*
  * 
  * @file    motor.c
  * @author  Andrew Krock
  * @date    2015-03-26 03:49:09
- * @edited  2015-05-11 00:10:09
+ * @edited  2015-05-19 20:54:23
  */
 
 #include <pololu/orangutan.h>

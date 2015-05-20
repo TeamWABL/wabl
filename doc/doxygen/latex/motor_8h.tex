@@ -1,0 +1,65 @@
+\hypertarget{motor_8h}{\section{motor.\-h File Reference}
+\label{motor_8h}\index{motor.\-h@{motor.\-h}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{motor_8h_a3a4dd14bf1e092d094ac19ed5b4533d5}{motor\-\_\-pid} (double torque\-Ref, unsigned char motor)
+\begin{DoxyCompactList}\small\item\em Calculates new motor voltage. \end{DoxyCompactList}\item 
+double \hyperlink{motor_8h_a00ca2f7967b21f5ed5696b3a134e2c2c}{get\-\_\-current\-\_\-value} (double raw)
+\begin{DoxyCompactList}\small\item\em Translate the raw current reading to amps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+P\-I\-D motor controller module
+
+\begin{DoxyAuthor}{Author}
+Andrew Krock 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015-\/03-\/26 03\-:49\-:13  2015-\/05-\/19 20\-:54\-:20 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{motor_8h_a00ca2f7967b21f5ed5696b3a134e2c2c}{\index{motor.\-h@{motor.\-h}!get\-\_\-current\-\_\-value@{get\-\_\-current\-\_\-value}}
+\index{get\-\_\-current\-\_\-value@{get\-\_\-current\-\_\-value}!motor.h@{motor.\-h}}
+\subsubsection[{get\-\_\-current\-\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}double get\-\_\-current\-\_\-value (
+\begin{DoxyParamCaption}
+\item[{double}]{raw}
+\end{DoxyParamCaption}
+)}}\label{motor_8h_a00ca2f7967b21f5ed5696b3a134e2c2c}
+
+
+Translate the raw current reading to amps. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em raw} & Raw current reading \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Current in amps 
+\end{DoxyReturn}
+\hypertarget{motor_8h_a3a4dd14bf1e092d094ac19ed5b4533d5}{\index{motor.\-h@{motor.\-h}!motor\-\_\-pid@{motor\-\_\-pid}}
+\index{motor\-\_\-pid@{motor\-\_\-pid}!motor.h@{motor.\-h}}
+\subsubsection[{motor\-\_\-pid}]{\setlength{\rightskip}{0pt plus 5cm}double motor\-\_\-pid (
+\begin{DoxyParamCaption}
+\item[{double}]{torque\-Ref, }
+\item[{unsigned char}]{motor}
+\end{DoxyParamCaption}
+)}}\label{motor_8h_a3a4dd14bf1e092d094ac19ed5b4533d5}
+
+
+Calculates new motor voltage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em torque\-Ref} & Torque reference from \hyperlink{lqr_8h_a75280381acbf4126bf5927326787ebc2}{lqr()} in N$\ast$m \\
+\hline
+{\em motor} & M\-O\-T\-O\-R1 or M\-O\-T\-O\-R2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Motor value that corresponds to a duty cycle \mbox{[}-\/255 255\mbox{]} 
+\end{DoxyReturn}

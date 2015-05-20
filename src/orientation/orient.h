@@ -3,7 +3,7 @@
  * @file    orient.h
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-24 10:19:26
- * @edited  2015-05-10 15:09:54
+ * @edited  2015-05-19 20:57:03
  */
 
 #ifndef ORIENT_H
@@ -47,26 +47,30 @@ void orient_calibrate(void);
 
 /**
  * @brief   Update orientation values
- * @param   delta_t_ms  Time since calling function last (delta_t)
+ * @param   delta_t_ms  Time since calling function last in milliseconds
  */
 void orient_update(uint8_t delta_t_ms);
 
 /**
+ * @brief   Get raw angular velocity
  * @return  Angular velocity in gyro raw units
  */
 double orient_get_phi_dot_raw(void);
 
 /**
+ * @brief   Get angular velocity
  * @return  Angular velocity (phi_dot) in milliradians/second
  */
 double orient_get_phi_dot(void);
 
 /**
+ * @brief   Get raw angle
  * @return  Angle (phi) in gyro raw units
  */
 double orient_get_phi_raw(void);
 
 /**
+ * @brief   Get angle
  * @return  Angle (phi) in milliradians
  */
 double orient_get_phi(void);

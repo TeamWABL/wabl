@@ -1,9 +1,9 @@
-/**
+/*
  * 
  * @file    encoder.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 20:19:10
- * @edited  2015-05-10 21:39:35
+ * @edited  2015-05-19 20:39:46
  */
 
 #include <pololu/orangutan.h>

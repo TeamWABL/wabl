@@ -1,9 +1,9 @@
-/**
+/*
  * WABL Linear Quadratic Regulator
  * @file    lqr.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 14:23:30
- * @edited  2015-05-12 15:00:03
+ * @edited  2015-05-19 20:45:55
  */
 
 // lqr weighting constants

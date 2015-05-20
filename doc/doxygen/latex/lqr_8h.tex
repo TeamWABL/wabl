@@ -1,0 +1,54 @@
+\hypertarget{lqr_8h}{\section{lqr.\-h File Reference}
+\label{lqr_8h}\index{lqr.\-h@{lqr.\-h}}
+}
+{\ttfamily \#include \char`\"{}lqr.\-h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{lqr_8h_a75280381acbf4126bf5927326787ebc2}{lqr} (float position\-Ref\-\_\-mm, float position\-\_\-mm, float velocity\-\_\-mm\-\_\-s, float angle\-\_\-mrad, float a\-\_\-velocity\-\_\-mrad\-\_\-s)
+\begin{DoxyCompactList}\small\item\em Calculate new torque reference from system states. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+W\-A\-B\-L Linear Quadratic Regulator
+
+\begin{DoxyAuthor}{Author}
+Stephen Papierski \href{mailto:stephenpapierski@gmail.com}{\tt stephenpapierski@gmail.\-com} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2015-\/04-\/28 14\-:23\-:33  2015-\/05-\/19 20\-:45\-:58 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{lqr_8h_a75280381acbf4126bf5927326787ebc2}{\index{lqr.\-h@{lqr.\-h}!lqr@{lqr}}
+\index{lqr@{lqr}!lqr.h@{lqr.\-h}}
+\subsubsection[{lqr}]{\setlength{\rightskip}{0pt plus 5cm}float lqr (
+\begin{DoxyParamCaption}
+\item[{float}]{position\-Ref\-\_\-mm, }
+\item[{float}]{position\-\_\-mm, }
+\item[{float}]{velocity\-\_\-mm\-\_\-s, }
+\item[{float}]{angle\-\_\-mrad, }
+\item[{float}]{a\-\_\-velocity\-\_\-mrad\-\_\-s}
+\end{DoxyParamCaption}
+)}}\label{lqr_8h_a75280381acbf4126bf5927326787ebc2}
+
+
+Calculate new torque reference from system states. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position\-Ref\-\_\-mm} & Position to track to in millimeters \\
+\hline
+{\em position\-\_\-mm} & System state\-: position (x) in millimeters \\
+\hline
+{\em velocity\-\_\-mm\-\_\-s} & System state\-: velocity (x\-\_\-dot) in millimeters/second \\
+\hline
+{\em angle\-\_\-mrad} & System state\-: pendulum angle (phi) in milliradians \\
+\hline
+{\em a\-\_\-velocity\-\_\-mrad\-\_\-s} & System state\-: pendulum angular velocity (phi\-\_\-dot) in milliradians/second \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New torque reference in N$\ast$m 
+\end{DoxyReturn}
