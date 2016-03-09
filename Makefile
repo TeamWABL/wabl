@@ -118,7 +118,7 @@ FOLDERS 	:= ./ $(sort $(dir $(wildcard $(SRC_FOLDER)/*/)))
 
 SRC			:= ./src/main.c
 # Custom Modules
-SRC			+= ./src/led/led.c
+#SRC			+= ./src/led/led.c
 SRC			+= ./src/motor/motor.c
 SRC			+= ./src/orientation/orient.c
 SRC			+= ./src/test_code/test.c
