@@ -3,7 +3,7 @@
  * @file    motor.c
  * @author  Andrew Krock
  * @date    2015-03-26 03:49:09
- * @edited  2016-03- 8 21:26:07
+ * @edited  2016-04- 3 18:44:02
  */
 
 #include <pololu/orangutan.h>
@@ -13,18 +13,13 @@
 #include "motor.h"
 
 //PID Multipliers
-double Kp = 100;
-double Ki = 0;
+double Kp = 300;
+double Ki = 100;
 double Kd = 0;
 
 //Motor Constants
 double Km_a = .694;
 double Km_b = .710;
-
-//Initializing PID terms
-double PTerm = 0;
-double ITerm = 0;
-double DTerm = 0;
 
 //Variables used to find current error
 //double Km = 0;	//motor constant
@@ -152,6 +147,8 @@ int16_t motor_update_pid(uint8_t motor, double torqueRef){
     double error = 0;
     double current_measured = 0;
     double Pterm = 0;
+    static double Iterm_a = 0;
+    static double Iterm_b = 0;
     int16_t motor_speed = 0;
 
     char print_buf[120];
@@ -167,10 +164,20 @@ int16_t motor_update_pid(uint8_t motor, double torqueRef){
             //Proportional Control
             Pterm = Kp * error;
 
-            motor_speed = motor_speed_a + Pterm;
+            motor_speed = /*motor_speed_a + */Pterm;
             break;
         case MOTOR2:
-            //do stuff
+            currentRef = torqueRef/Km_b;
+            current_measured = motor_get_current_a(MOTOR2);
+
+            error = currentRef - current_measured;
+
+            //Proportional Control
+            Pterm = Kp * error;
+
+            //Iterm_b += Ki * error;
+
+            motor_speed = /*motor_speed_b + */Pterm;
             break;
         default:;
             //do nothing
@@ -180,8 +187,9 @@ int16_t motor_update_pid(uint8_t motor, double torqueRef){
     else if (motor_speed < -255) motor_speed = -255;
 
     //debug printing
-    sprintf(print_buf, "torqueRef: %f\t currentRef: %f\t currentMeasured: %f\t error: %f\t speed: %d\n", torqueRef, currentRef, current_measured, error, motor_speed);
-    serial_send_blocking(UART0, print_buf, sizeof(print_buf));
+    //sprintf(print_buf, "torqueRef: %f\t currentRef: %f\t currentMeasured: %f\t error: %f\t speed: %d\n", torqueRef, currentRef, current_measured, error, motor_speed);
+    //sprintf(print_buf, "speed: %d\n", motor_speed);
+    //serial_send_blocking(UART0, print_buf, sizeof(print_buf));
 
 
     return motor_speed; 

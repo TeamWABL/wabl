@@ -3,7 +3,7 @@
  * @file    encoder.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 20:19:10
- * @edited  2015-05-19 20:39:46
+ * @edited  2016-04- 3 19:23:09
  */
 
 #include <pololu/orangutan.h>
@@ -28,7 +28,7 @@ double b_x_dot;
 double b_previous_x_raw;
 
 void encoder_init(void){
-    //sets which io pins correspone to which motors/phases
+    //pololu function that sets which io pins correspond to which motors/phases
     encoders_init(IO_D5, IO_D4, IO_D6, IO_D7);
 
     //motor A/1 variables
@@ -58,15 +58,17 @@ void encoder_update(uint8_t delta_t_ms){
     //convert new x values to millimeters
     a_x = a_x_raw * count2mmeter;
     b_x = b_x_raw * count2mmeter;
+    //b_x = 501;
 
     //calculate raw velocities
     //multiply by 1000 to account for milliseconds (results in ticks/second)
     a_x_dot_raw = (((a_x_raw - a_previous_x_raw) * 1000) / delta_t_ms);
     b_x_dot_raw = (((b_x_raw - b_previous_x_raw) * 1000) / delta_t_ms);
 
-    //conver new velocities to millimeters/second
+    //convert new velocities to millimeters/second
     a_x_dot = a_x_dot_raw * count2mmeter;
     b_x_dot = b_x_dot_raw * count2mmeter;
+    //b_x_dot = 3.14;
 }
 
 double encoder_get_x(unsigned char motor){
