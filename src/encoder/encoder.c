@@ -3,7 +3,7 @@
  * @file    encoder.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 20:19:10
- * @edited  2016-04- 3 19:23:09
+ * @edited  2016-04- 7 22:10:56
  */
 
 #include <pololu/orangutan.h>
@@ -58,7 +58,6 @@ void encoder_update(uint8_t delta_t_ms){
     //convert new x values to millimeters
     a_x = a_x_raw * count2mmeter;
     b_x = b_x_raw * count2mmeter;
-    //b_x = 501;
 
     //calculate raw velocities
     //multiply by 1000 to account for milliseconds (results in ticks/second)
@@ -68,7 +67,6 @@ void encoder_update(uint8_t delta_t_ms){
     //convert new velocities to millimeters/second
     a_x_dot = a_x_dot_raw * count2mmeter;
     b_x_dot = b_x_dot_raw * count2mmeter;
-    //b_x_dot = 3.14;
 }
 
 double encoder_get_x(unsigned char motor){

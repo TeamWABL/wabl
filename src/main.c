@@ -3,7 +3,7 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2016-04- 3 19:11:31
+ * @edited  2016-04- 7 23:07:05
  */
 
 #define F_CPU   20000000UL
@@ -77,6 +77,7 @@ int main(void){
 
     while(1){
         if (!safety_battery_critical()){
+            safety_led_toggle();
             //clear print buf
             memset(print_buf, 0, 120);
 
@@ -84,22 +85,20 @@ int main(void){
             phi = orient_get_phi();
             phi_dot = orient_get_phi_dot();
             
-            //      a_x = encoder_get_x(MOTOR1);
-            //      a_x_dot = encoder_get_x_dot(MOTOR1);
+            a_x = encoder_get_x(MOTOR1);
+            a_x_dot = encoder_get_x_dot(MOTOR1);
 
             b_x = encoder_get_x(MOTOR2);
             b_x_dot = encoder_get_x_dot(MOTOR2);
 
-            //      a_torqueRef = lqr(positionRef_mm, a_x, a_x_dot, phi, phi_dot);
+            a_torqueRef = lqr(positionRef_mm, a_x, a_x_dot, phi, phi_dot);
             b_torqueRef = lqr(positionRef_mm, b_x, b_x_dot, phi, phi_dot);
 
-            //b_torqueRef = 0.710;
+            a_motor_speed = motor_update_pid(MOTOR1, a_torqueRef);
+            b_motor_speed = motor_update_pid(MOTOR2, b_torqueRef);
 
-            //a_motor_speed = motor_update_pid(MOTOR1, a_torqueRef);
-            //b_motor_speed = motor_update_pid(MOTOR2, b_torqueRef);
-
-            //      //set motors
-            //      motor_set_speed(MOTOR1, a_motor_speed);
+            //set motors
+            //motor_set_speed(MOTOR1, a_motor_speed);
             //motor_set_speed(MOTOR2, b_motor_speed);
             //motor_set_speed(MOTOR2, b_motor_speed);
 
@@ -123,9 +122,10 @@ int main(void){
             //int direction = motor_get_direction(MOTOR1);
             //sprintf(print_buf, "current: %f\t direction: %d\n", current, direction);
             //sprintf(print_buf, "%d\n", b_x);
-            sprintf(print_buf, "%f\n", b_x);
-            serial_send_blocking(XBEE, print_buf, sizeof(print_buf));
-            delay_ms(200);
+            //motor_set_speed(MOTOR2, 255);
+            //sprintf(print_buf, "%f\n", orient_get_phi());
+            //serial_send(XBEE, print_buf, sizeof(print_buf));
+            //delay_ms(200);
             //delay_ms(200);
 
 
@@ -139,6 +139,7 @@ int main(void){
             //x2_set_motor(0x01, 0x00, 255);
             //set_motors(255,255);
             //serial_send_blocking(XBEE, "done. \n", sizeof("done. \n"));
+            delay_ms(100);
         }else{
             //player critical battery melody
             sound_play_melody(BATTERY_CRITICAL);
@@ -158,8 +159,10 @@ ISR(TIMER1_COMPA_vect){
     static uint8_t motor_update_tmr;
     //static uint16_t print_tmr;
     
-    cli();
+    //cli();
 
+    yellow_led(true);
+    //650 uS process
     if (++orient_update_tmr == 20){
         orient_update_tmr = 0;
         orient_update(20);
@@ -167,13 +170,15 @@ ISR(TIMER1_COMPA_vect){
     }
 
     //b_torqueRef = 0.7;
-    //if (++motor_update_tmr == 3){
-        //motor_update_tmr = 0;
+    if (++motor_update_tmr == 3){
+    //motor_update_tmr = 0;
+    //110 uS process
         b_motor_speed = motor_update_pid(MOTOR2, b_torqueRef);
         motor_set_speed(MOTOR2, b_motor_speed);
         motor_set_speed(MOTOR1, b_motor_speed);
-    //}
-    sei();
+    }
+    //sei();
 
     //sysT_timer_service();
+    yellow_led(false);
 }
