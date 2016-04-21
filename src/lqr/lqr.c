@@ -3,7 +3,7 @@
  * @file    lqr.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 14:23:30
- * @edited  2015-05-19 20:45:55
+ * @edited  2016-04-21 14:17:48
  */
 
 // lqr weighting constants
@@ -11,6 +11,10 @@ double k_phi = -4.3791;
 double k_phi_dot = -2.5055;
 double k_x = -0.4296;
 double k_x_dot = -1.0200;
+//  double k_x = 0.6436;
+//  double k_x_dot = 0.7787;
+//  double k_phi = -5.0436;
+//  double k_phi_dot = -0.6328;
 
 double lqr(double positionRef_mm, double position_mm, double velocity_mm_s, double angle_mrad, double a_velocity_mrad_s){
 

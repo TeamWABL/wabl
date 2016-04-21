@@ -3,7 +3,7 @@
  * @file    motor.c
  * @author  Andrew Krock
  * @date    2015-03-26 03:49:09
- * @edited  2016-04- 7 22:11:00
+ * @edited  2016-04-21 14:17:53
  */
 
 #include <pololu/orangutan.h>
@@ -13,8 +13,8 @@
 #include "motor.h"
 
 //PID Multipliers
-double Kp = 300;
-double Ki = 100;
+double Kp = 200;
+double Ki = 50;
 double Kd = 0;
 
 //Motor Constants
@@ -164,7 +164,10 @@ int16_t motor_update_pid(uint8_t motor, double torqueRef){
             //Proportional Control
             Pterm = Kp * error;
 
-            motor_speed = /*motor_speed_a + */Pterm;
+            //Integral Control
+            Iterm_a += Ki * error;
+
+            motor_speed = Pterm + Iterm_a;
             break;
         case MOTOR2:
             currentRef = torqueRef/Km_b;
@@ -174,10 +177,11 @@ int16_t motor_update_pid(uint8_t motor, double torqueRef){
 
             //Proportional Control
             Pterm = Kp * error;
+            
+            //Integral Control
+            Iterm_b += Ki * error;
 
-            //Iterm_b += Ki * error;
-
-            motor_speed = /*motor_speed_b + */Pterm;
+            motor_speed = Pterm + Iterm_b;
             break;
         default:;
             //do nothing

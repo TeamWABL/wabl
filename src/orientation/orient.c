@@ -3,7 +3,7 @@
  * @file    orient.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-24 10:19:19
- * @edited  2015-05-19 20:54:41
+ * @edited  2016-04- 9 16:54:49
  */
 
 #define F_CPU   20000000
@@ -51,8 +51,10 @@ void orient_init(void){
     orient_calibrate();
 
     //this assumes starting on kick stand for calibration
-    phi_raw = -1167;
-    phi = -178.2;
+    //phi_raw = -1167;
+    phi_raw = -2171.6;
+    //phi = -178.2;
+    phi = -331.6;
     phi_dot_raw = 0;
     phi_dot = 0;
     previous_phi_dot_raw = 0;
