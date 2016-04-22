@@ -3,7 +3,7 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2016-04-21 15:18:05
+ * @edited  2016-04-22 17:10:15
  */
 
 #define F_CPU   20000000UL
@@ -33,7 +33,7 @@ char print_buf[120];
 int main(void){
     //uart setup
 
-    uart_init();
+    computer_interface_init();
 //	char print_buf[120];
 
     serial_send_blocking(XBEE, "Initializing UART...", 20);
@@ -91,54 +91,18 @@ int main(void){
             //      b_x = encoder_get_x(MOTOR2);
             //      b_x_dot = encoder_get_x_dot(MOTOR2);
 
-            a_torqueRef = lqr(positionRef_mm, a_x, a_x_dot, phi, phi_dot);
+            //      a_torqueRef = lqr(positionRef_mm, a_x, a_x_dot, phi, phi_dot);
             //      b_torqueRef = lqr(positionRef_mm, b_x, b_x_dot, phi, phi_dot);
-            //a_torqueRef = 0.5;
 
-            //set motors
-            //motor_set_speed(MOTOR1, a_motor_speed);
-            //motor_set_speed(MOTOR2, b_motor_speed);
-            //motor_set_speed(MOTOR2, b_motor_speed);
 
-            //sprintf(print_buf, "phi = %10f, phi_raw = %10f, phi_dot = %10f, phi_dot_raw = %10f\n", phi, phi_raw, phi_dot, phi_dot_raw);	
-            //sprintf(print_buf, "phi = %10f, phi_dot = %10f, b_x = %10f, b_x_dot = %10f\n", phi, phi_dot, b_x, b_x_dot);	
-            //sprintf(print_buf, "%f\n", phi);	
-            //sprintf(print_buf, "A:%10f\tB:%10f\n", a_torqueRef, b_torqueRef);	
-            //sprintf(print_buf, "A:%10d\tB:%10d\n", a_motor_speed, b_motor_speed);	
-            //sprintf(print_buf, "Phi: %10f\tX: %10f\tTorque: %10f\tSpeed: %10d\n", phi, a_x, a_torqueRef, a_motor_speed);
-            //serial_send_blocking(XBEE, print_buf, sizeof(print_buf));
-            //serial_send_blocking(XBEE, "testing\n", sizeof("testing\n"));
-            //motor_update_pid_B(uRef);
-            
-
-            
-            ////serial_send_blocking(XBEE, "hi \n", sizeof("hi \n"));
-            ////x2_set_motor(MOTOR1, IMMEDIATE_DRIVE, -255);
-            //motor_set_speed(MOTOR1, -255);
-            ////int current = x2_get_motor_current(MOTOR1);
-            //double current = motor_get_current_ma(MOTOR1);
-            //int direction = motor_get_direction(MOTOR1);
-            //sprintf(print_buf, "current: %f\t direction: %d\n", current, direction);
-            //sprintf(print_buf, "%d\n", b_x);
-            //motor_set_speed(MOTOR2, 255);
             //sprintf(print_buf, "%f\n", orient_get_phi());
             //serial_send(XBEE, print_buf, sizeof(print_buf));
-            //delay_ms(200);
-            //delay_ms(200);
 
 
-            //int16_t speed = motor_update_pid(MOTOR1, 0.2082);
-            //motor_set_speed(MOTOR1, speed);
+            //handle new message from XBEE
+            computer_interface_check_for_new_bytes();
+            
 
-            // sprintf(print_buf, "current: %f\t speed: %d\n", motor_get_current_a(MOTOR1), speed);
-            // serial_send_blocking(XBEE, print_buf, sizeof(print_buf));
-            //x2_set_motor(MOTOR2, IMMEDIATE_DRIVE, 255);
-            //x2_set_motor(0x00, 0x00, 255);
-            //x2_set_motor(0x01, 0x00, 255);
-            //set_motors(255,255);
-            //serial_send_blocking(XBEE, "done. \n", sizeof("done. \n"));
-            sprintf(print_buf, "%f\n", orient_get_phi());
-            serial_send(XBEE, print_buf, sizeof(print_buf));
             delay_ms(10);
         }else{
             //player critical battery melody

@@ -3,7 +3,7 @@
  * @file    motor.c
  * @author  Andrew Krock
  * @date    2015-03-26 03:49:09
- * @edited  2016-04-21 14:17:53
+ * @edited  2016-04-22 17:08:59
  */
 
 #include <pololu/orangutan.h>
@@ -215,15 +215,28 @@ double get_current_value(double raw){
 }
 
 double motor_get_current_ma(uint8_t motor){
+    double magnitude = 0.0;
+
     int16_t  raw_current = x2_get_motor_current(motor);
 
     int8_t direction = motor_get_direction(motor);
 
     //5000 mvolts, 256 levels (8 bit dac), .13 V/A sensitivity
-    double magnitude = (raw_current * (5000.0 / 256.0))/0.13;
+    //      double magnitude = (raw_current * (5000.0 / 256.0))/0.13;
+    if (raw_current == 0){
+        return 0.0;
+    }else{
+        if (direction == 1){
+            magnitude = 160 + (raw_current * ((5000/256)/0.14));
+        }else if (direction == -1){
+            magnitude = -184 - (raw_current * ((5000/256)/0.14));
+        }
+        return magnitude;
+    }
+
     
-    if (magnitude == 0.0) return 0.0;
-    else return direction * magnitude;
+    //if (magnitude == 0.0) return 0.0;
+    //else return direction * magnitude;
     //return direction * ();
 }
 

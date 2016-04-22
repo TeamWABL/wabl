@@ -122,15 +122,15 @@ SRC			:= ./src/main.c
 SRC			+= ./src/motor/motor.c
 SRC			+= ./src/orientation/orient.c
 SRC			+= ./src/test_code/test.c
-SRC			+= ./src/uart/uart.c
+SRC			+= ./src/computer_interface/computer_interface.c
 SRC			+= ./src/lqr/lqr.c
 SRC			+= ./src/encoder/encoder.c
 SRC			+= ./src/safety/safety.c
 SRC			+= ./src/sound/sound.c
-SRC			+= ./src/communication/comm.c
 # Libraries
 SRC			+= ./libs/avr-systimer/tmr.c
 SRC			+= ./libs/ringbuffer/ringbuffer.c
+#SRC			+= ./libs/avr-uart/uart.c
 
 I2C_DIR		:= ./libs/i2cmaster
 I2C_TRG		:= $(I2C_DIR)/i2cmaster
