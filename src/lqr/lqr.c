@@ -3,7 +3,7 @@
  * @file    lqr.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 14:23:30
- * @edited  2016-04-21 14:17:48
+ * @edited  2016-05- 3 23:27:38
  */
 
 // lqr weighting constants
@@ -29,4 +29,20 @@ double lqr(double positionRef_mm, double position_mm, double velocity_mm_s, doub
     torqueRef = (torqueRef > 5) ? 5 : torqueRef;
     torqueRef = (torqueRef < -5) ? -5 : torqueRef;
     return torqueRef;
+}
+
+void lqr_set_k_phi(double new_k_phi){
+    k_phi = new_k_phi;
+}
+
+void lqr_set_k_phi_dot(double new_k_phi_dot){
+    k_phi_dot = new_k_phi_dot;
+}
+
+void lqr_set_k_x(double new_k_x){
+    k_x = new_k_x;
+}
+
+void lqr_set_k_x_dot(double new_k_x_dot){
+    k_x_dot = new_k_x_dot;
 }

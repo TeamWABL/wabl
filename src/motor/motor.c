@@ -3,7 +3,7 @@
  * @file    motor.c
  * @author  Andrew Krock
  * @date    2015-03-26 03:49:09
- * @edited  2016-04-22 17:08:59
+ * @edited  2016-05- 3 22:38:07
  */
 
 #include <pololu/orangutan.h>
@@ -206,6 +206,14 @@ void motor_set_speed(uint8_t motor, int16_t speed){
         motor_speed_b = speed;
     }
     x2_set_motor(motor, IMMEDIATE_DRIVE, speed);
+}
+
+void motor_set_kp(double new_kp){
+    Kp = new_kp;
+}
+
+void motor_set_ki(double new_ki){
+    Ki = new_ki;
 }
 
 //Translate the current reading to amps

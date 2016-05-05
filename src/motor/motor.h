@@ -3,7 +3,7 @@
  * @file    motor.h
  * @author  Andrew Krock
  * @date    2015-03-26 03:49:13
- * @edited  2016-03- 8 19:36:30
+ * @edited  2016-05- 3 22:38:04
  */
 
 #ifndef MOTOR_H
@@ -32,6 +32,18 @@ double get_current_value(double raw);
  * @param   speed   Value from -255 to 255 that corresponds to the duty cycle applied to the motor
  */
 void motor_set_speed(uint8_t motor, int16_t speed);
+
+/**
+ * Set a new value for the proportional PID constant
+ * @param   new_kp  Value to set the proportional constant to
+ */
+void motor_set_kp(double new_kp);
+
+/**
+ * Set a new value for the integral PID constant
+ * @param   new_ki  Value to set the integral constant to
+ */
+void motor_set_ki(double new_ki);
 
 /**
  * @brief   Get the current draw of a motor in milliamps

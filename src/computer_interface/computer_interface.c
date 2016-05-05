@@ -3,13 +3,16 @@
  * @file    computer_interface.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-04-28 09:17:13
- * @edited  2016-04-22 17:10:12
+ * @edited  2016-05- 4 01:50:20
  */
 
 #include <pololu/orangutan.h>
 #include <stdio.h>
 #include <stdint.h>
 #include "computer_interface.h"
+#include "../motor/motor.h"
+#include "../lqr/lqr.h"
+#include "../modules.h"
 
 char read_buff[36]; //ring buffer for characters read in
 uint8_t read_buff_head = 0; //head index position of ring buffer
@@ -54,6 +57,10 @@ void computer_interface_check_for_new_bytes(void){
 }
 
 void process_new_bytes(uint8_t byte){
+    static uint8_t previous_byte7 = 0;
+    static uint8_t previous_byte6 = 0;
+    static uint8_t previous_byte5 = 0;
+    static uint8_t previous_byte4 = 0;
     static uint8_t previous_byte3 = 0;
     static uint8_t previous_byte2 = 0;
     static uint8_t previous_byte = 0;
@@ -62,59 +69,49 @@ void process_new_bytes(uint8_t byte){
     //if (previous_byte3 == 0x45){
     //    if (previous_byte2 == 0xC2){
     //        if (previous_byte == 0x21){
-    if (previous_byte3 == 'A'){
-        if (previous_byte2 == 'B'){
-            if (previous_byte == 'C'){
-                command_handler(byte);
+    //if (previous_byte7 == 'a'){
+    //    if (previous_byte6 == 'b'){
+    //        if (previous_byte5 == 'c'){
+    //            if (previous_byte4 == 'd'){
+    if (previous_byte7 == 0x45){
+        if (previous_byte6 == 0xC2){
+            if (previous_byte5 == 0x21){
+                if (previous_byte4 == 0x01){
+                    //get_id (return "WABL")
+                    char id[] = "WABL";
+                    serial_send_blocking(XBEE, id, sizeof(id));
+                }else{
+                    double data = ((uint32_t) previous_byte3 << 24 | (uint32_t) previous_byte2 << 16 | previous_byte << 8 | byte);
+                    if (previous_byte4 == 0x02){
+                        //set_motor_kp
+                        motor_set_kp(data);
+                    }else if (previous_byte4 == 0x03){
+                        //set_motor_ki
+                        motor_set_ki(data);
+                    }else if (previous_byte4 == 0x04){
+                        //set_lqr_x
+                        lqr_set_k_x(data);
+                    }else if (previous_byte4 == 0x05){
+                        //set_lqr_x_dot
+                        lqr_set_k_x_dot(data);
+                    }else if (previous_byte4 == 0x06){
+                        //set_lqr_phi
+                        lqr_set_k_phi(data);
+                    }else if (previous_byte4 == 0x07){
+                        //set_lqr_phi_dot
+                        lqr_set_k_phi_dot(data);
+                    }
+                }
             }
         }
     }
 
     //move bytes to previous bytes
+    previous_byte7 = previous_byte6;
+    previous_byte6 = previous_byte5;
+    previous_byte5 = previous_byte4;
+    previous_byte4 = previous_byte3;
     previous_byte3 = previous_byte2;
     previous_byte2 = previous_byte;
     previous_byte = byte;
 }
-
-void command_handler(uint8_t opcode){
-    //handle commands
-    if (opcode == 'A'){
-        //get id (return "WABL")
-        char id[] = "WABL";
-        serial_send_blocking(XBEE, id, sizeof(id));
-
-    }else if (opcode == 0x02){
-        //set motor kp
-    }else if (opcode == 0x03){
-        //set motor ki
-    }else if (opcode == 0x04){
-        //set lqr x
-    }else if (opcode == 0x05){
-        //set lqr x dot
-    }else if (opcode == 0x06){
-        //set lqr phi
-    }else if (opcode == 0x07){
-        //set lqr phi dot
-    }
-}
-
-//void computer_interface_command_handler(uint8_t opcode){
-//    if (opcode == 0x01){
-//        //get id (return "WABL")
-//        char *id = "WABL";
-//        serial_send(XBEE, id, sizeof(id));
-//
-//    }else if (opcode == 0x02){
-//        //set motor kp
-//    }else if (opcode == 0x03){
-//        //set motor ki
-//    }else if (opcode == 0x04){
-//        //set lqr x
-//    }else if (opcode == 0x05){
-//        //set lqr x dot
-//    }else if (opcode == 0x06){
-//        //set lqr phi
-//    }else if (opcode == 0x07){
-//        //set lqr phi dot
-//    }
-//}
