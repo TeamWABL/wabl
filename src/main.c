@@ -3,7 +3,7 @@
  * @file    main.c
  * @author  Stephen Papierski <stephenpapierski@gmail.com>
  * @date    2015-03-22 20:08:47
- * @edited  2016-05- 4 02:27:23
+ * @edited  2016-05- 5 01:50:07
  */
 
 #define F_CPU   20000000UL
@@ -60,9 +60,6 @@ int main(void){
     //position to track to in millimeters
     double positionRef_mm = 0;
 
-    //int16_t a_motor_speed;
-    //int16_t b_motor_speed;
-
     // timer setup
     serial_send_blocking(XBEE, "Initializing Timer...", 21);
 
@@ -91,7 +88,7 @@ int main(void){
             //      b_x = encoder_get_x(MOTOR2);
             //      b_x_dot = encoder_get_x_dot(MOTOR2);
 
-            //      a_torqueRef = lqr(positionRef_mm, a_x, a_x_dot, phi, phi_dot);
+            a_torqueRef = lqr(positionRef_mm, a_x, a_x_dot, phi, phi_dot);
             //      b_torqueRef = lqr(positionRef_mm, b_x, b_x_dot, phi, phi_dot);
 
 
