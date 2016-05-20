@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lqr',['lqr',['../lqr_8h.html#a75280381acbf4126bf5927326787ebc2',1,'lqr.h']]]
+  ['get_5fcurrent_5fvalue',['get_current_value',['../motor_8h.html#a00ca2f7967b21f5ed5696b3a134e2c2c',1,'motor.c']]]
 ];

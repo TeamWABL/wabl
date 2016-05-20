@@ -1,19 +1,19 @@
-\hypertarget{main_8c}{\section{main.\-c File Reference}
-\label{main_8c}\index{main.\-c@{main.\-c}}
+\hypertarget{main_8c}{\section{main.\+c File Reference}
+\label{main_8c}\index{main.\+c@{main.\+c}}
 }
-{\ttfamily \#include $<$avr/io.\-h$>$}\\*
-{\ttfamily \#include $<$util/delay.\-h$>$}\\*
-{\ttfamily \#include $<$pololu/orangutan.\-h$>$}\\*
-{\ttfamily \#include $<$stdint.\-h$>$}\\*
-{\ttfamily \#include $<$string.\-h$>$}\\*
-{\ttfamily \#include $<$stdio.\-h$>$}\\*
-{\ttfamily \#include \char`\"{}io\-\_\-defs.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}modules.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}test\-\_\-code/test.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$avr/io.\+h$>$}\\*
+{\ttfamily \#include $<$util/delay.\+h$>$}\\*
+{\ttfamily \#include $<$pololu/orangutan.\+h$>$}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}io\+\_\+defs.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}modules.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}test\+\_\+code/test.\+h\char`\"{}}\\*
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{main_8c_a43bafb28b29491ec7f871319b5a3b2f8}{\#define {\bfseries F\-\_\-\-C\-P\-U}~20000000\-U\-L}\label{main_8c_a43bafb28b29491ec7f871319b5a3b2f8}
+\hypertarget{main_8c_a43bafb28b29491ec7f871319b5a3b2f8}{\#define {\bfseries F\+\_\+\+C\+P\+U}~20000000\+U\+L}\label{main_8c_a43bafb28b29491ec7f871319b5a3b2f8}
 
 \end{DoxyCompactItemize}
 \subsection*{Functions}
@@ -22,17 +22,35 @@
 \hypertarget{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{int {\bfseries main} (void)}\label{main_8c_a840291bc02cba5474a4cb46a9b9566fe}
 
 \item 
-\hypertarget{main_8c_ad39420cdd896dd12c68e36313139d0a5}{{\bfseries I\-S\-R} (T\-I\-M\-E\-R1\-\_\-\-C\-O\-M\-P\-A\-\_\-vect)}\label{main_8c_ad39420cdd896dd12c68e36313139d0a5}
+\hypertarget{main_8c_ad39420cdd896dd12c68e36313139d0a5}{{\bfseries I\+S\+R} (T\+I\+M\+E\+R1\+\_\+\+C\+O\+M\+P\+A\+\_\+vect)}\label{main_8c_ad39420cdd896dd12c68e36313139d0a5}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{main_8c_a5eb7e7bcb10652e0f1f79a11c34f9814}{double {\bfseries a\+\_\+torque\+Ref} = 0}\label{main_8c_a5eb7e7bcb10652e0f1f79a11c34f9814}
+
+\item 
+\hypertarget{main_8c_a6a754841cfc6eb96fc83b6fa8b7517ff}{double {\bfseries b\+\_\+torque\+Ref} = 0}\label{main_8c_a6a754841cfc6eb96fc83b6fa8b7517ff}
+
+\item 
+\hypertarget{main_8c_a72d20a5116b84ae64d69c1be73ede487}{int16\+\_\+t {\bfseries a\+\_\+motor\+\_\+speed} = 0}\label{main_8c_a72d20a5116b84ae64d69c1be73ede487}
+
+\item 
+\hypertarget{main_8c_a2199eaf8283aece0871cb20c04692610}{int16\+\_\+t {\bfseries b\+\_\+motor\+\_\+speed} = 0}\label{main_8c_a2199eaf8283aece0871cb20c04692610}
+
+\item 
+\hypertarget{main_8c_a9899691d83c2988f3a1e67819e69bafd}{char {\bfseries print\+\_\+buf} \mbox{[}120\mbox{]}}\label{main_8c_a9899691d83c2988f3a1e67819e69bafd}
 
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-W\-A\-B\-L main loop
+W\+A\+B\+L main loop
 
 \begin{DoxyAuthor}{Author}
-Stephen Papierski \href{mailto:stephenpapierski@gmail.com}{\tt stephenpapierski@gmail.\-com} 
+Stephen Papierski \href{mailto:stephenpapierski@gmail.com}{\tt stephenpapierski@gmail.\+com} 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-2015-\/03-\/22 20\-:08\-:47  2015-\/05-\/19 22\-:12\-:10 
+2015-\/03-\/22 20\+:08\+:47  2016-\/05-\/ 5 01\+:50\+:07 
 \end{DoxyDate}

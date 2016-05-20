@@ -1,35 +1,43 @@
-\hypertarget{lqr_8h}{\section{lqr.\-h File Reference}
-\label{lqr_8h}\index{lqr.\-h@{lqr.\-h}}
+\hypertarget{lqr_8h}{\section{lqr.\+h File Reference}
+\label{lqr_8h}\index{lqr.\+h@{lqr.\+h}}
 }
-{\ttfamily \#include \char`\"{}lqr.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}lqr.\+h\char`\"{}}\\*
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-float \hyperlink{lqr_8h_a75280381acbf4126bf5927326787ebc2}{lqr} (float position\-Ref\-\_\-mm, float position\-\_\-mm, float velocity\-\_\-mm\-\_\-s, float angle\-\_\-mrad, float a\-\_\-velocity\-\_\-mrad\-\_\-s)
-\begin{DoxyCompactList}\small\item\em Calculate new torque reference from system states. \end{DoxyCompactList}\end{DoxyCompactItemize}
+float \hyperlink{lqr_8h_a75280381acbf4126bf5927326787ebc2}{lqr} (float position\+Ref\+\_\+mm, float position\+\_\+mm, float velocity\+\_\+mm\+\_\+s, float angle\+\_\+mrad, float a\+\_\+velocity\+\_\+mrad\+\_\+s)
+\begin{DoxyCompactList}\small\item\em Calculate new torque reference from system states. \end{DoxyCompactList}\item 
+void \hyperlink{lqr_8h_a52ca6a5dc77b2421fe5ca2c2e41b9923}{lqr\+\_\+set\+\_\+k\+\_\+phi} (double new\+\_\+k\+\_\+phi)
+\begin{DoxyCompactList}\small\item\em Set new lqr phi constant. \end{DoxyCompactList}\item 
+void \hyperlink{lqr_8h_a5eb410c37106775b0a557b4f95097123}{lqr\+\_\+set\+\_\+k\+\_\+phi\+\_\+dot} (double new\+\_\+k\+\_\+phi\+\_\+dot)
+\begin{DoxyCompactList}\small\item\em Set new lqr phi\+\_\+dot constant. \end{DoxyCompactList}\item 
+void \hyperlink{lqr_8h_a0c8984c4e4b69b4e4e243c6830ac5e1a}{lqr\+\_\+set\+\_\+k\+\_\+x} (double new\+\_\+k\+\_\+x)
+\begin{DoxyCompactList}\small\item\em Set new lqr x constant. \end{DoxyCompactList}\item 
+void \hyperlink{lqr_8h_a3cc7a9bcab885000a3813bcf8429c343}{lqr\+\_\+set\+\_\+k\+\_\+x\+\_\+dot} (double new\+\_\+k\+\_\+x\+\_\+dot)
+\begin{DoxyCompactList}\small\item\em Set new lqr x\+\_\+dot constant. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-W\-A\-B\-L Linear Quadratic Regulator
+W\+A\+B\+L Linear Quadratic Regulator
 
 \begin{DoxyAuthor}{Author}
-Stephen Papierski \href{mailto:stephenpapierski@gmail.com}{\tt stephenpapierski@gmail.\-com} 
+Stephen Papierski \href{mailto:stephenpapierski@gmail.com}{\tt stephenpapierski@gmail.\+com} 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-2015-\/04-\/28 14\-:23\-:33  2015-\/05-\/19 20\-:45\-:58 
+2015-\/04-\/28 14\+:23\+:33  2016-\/05-\/ 3 23\+:25\+:01 
 \end{DoxyDate}
 
 
 \subsection{Function Documentation}
-\hypertarget{lqr_8h_a75280381acbf4126bf5927326787ebc2}{\index{lqr.\-h@{lqr.\-h}!lqr@{lqr}}
-\index{lqr@{lqr}!lqr.h@{lqr.\-h}}
+\hypertarget{lqr_8h_a75280381acbf4126bf5927326787ebc2}{\index{lqr.\+h@{lqr.\+h}!lqr@{lqr}}
+\index{lqr@{lqr}!lqr.\+h@{lqr.\+h}}
 \subsubsection[{lqr}]{\setlength{\rightskip}{0pt plus 5cm}float lqr (
 \begin{DoxyParamCaption}
-\item[{float}]{position\-Ref\-\_\-mm, }
-\item[{float}]{position\-\_\-mm, }
-\item[{float}]{velocity\-\_\-mm\-\_\-s, }
-\item[{float}]{angle\-\_\-mrad, }
-\item[{float}]{a\-\_\-velocity\-\_\-mrad\-\_\-s}
+\item[{float}]{position\+Ref\+\_\+mm, }
+\item[{float}]{position\+\_\+mm, }
+\item[{float}]{velocity\+\_\+mm\+\_\+s, }
+\item[{float}]{angle\+\_\+mrad, }
+\item[{float}]{a\+\_\+velocity\+\_\+mrad\+\_\+s}
 \end{DoxyParamCaption}
 )}}\label{lqr_8h_a75280381acbf4126bf5927326787ebc2}
 
@@ -38,17 +46,81 @@ Calculate new torque reference from system states.
 
 
 \begin{DoxyParams}{Parameters}
-{\em position\-Ref\-\_\-mm} & Position to track to in millimeters \\
+{\em position\+Ref\+\_\+mm} & Position to track to in millimeters \\
 \hline
-{\em position\-\_\-mm} & System state\-: position (x) in millimeters \\
+{\em position\+\_\+mm} & System state\+: position (x) in millimeters \\
 \hline
-{\em velocity\-\_\-mm\-\_\-s} & System state\-: velocity (x\-\_\-dot) in millimeters/second \\
+{\em velocity\+\_\+mm\+\_\+s} & System state\+: velocity (x\+\_\+dot) in millimeters/second \\
 \hline
-{\em angle\-\_\-mrad} & System state\-: pendulum angle (phi) in milliradians \\
+{\em angle\+\_\+mrad} & System state\+: pendulum angle (phi) in milliradians \\
 \hline
-{\em a\-\_\-velocity\-\_\-mrad\-\_\-s} & System state\-: pendulum angular velocity (phi\-\_\-dot) in milliradians/second \\
+{\em a\+\_\+velocity\+\_\+mrad\+\_\+s} & System state\+: pendulum angular velocity (phi\+\_\+dot) in milliradians/second \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 New torque reference in N$\ast$m 
 \end{DoxyReturn}
+\hypertarget{lqr_8h_a52ca6a5dc77b2421fe5ca2c2e41b9923}{\index{lqr.\+h@{lqr.\+h}!lqr\+\_\+set\+\_\+k\+\_\+phi@{lqr\+\_\+set\+\_\+k\+\_\+phi}}
+\index{lqr\+\_\+set\+\_\+k\+\_\+phi@{lqr\+\_\+set\+\_\+k\+\_\+phi}!lqr.\+h@{lqr.\+h}}
+\subsubsection[{lqr\+\_\+set\+\_\+k\+\_\+phi}]{\setlength{\rightskip}{0pt plus 5cm}void lqr\+\_\+set\+\_\+k\+\_\+phi (
+\begin{DoxyParamCaption}
+\item[{double}]{new\+\_\+k\+\_\+phi}
+\end{DoxyParamCaption}
+)}}\label{lqr_8h_a52ca6a5dc77b2421fe5ca2c2e41b9923}
+
+
+Set new lqr phi constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+k\+\_\+phi} & New phi constant \\
+\hline
+\end{DoxyParams}
+\hypertarget{lqr_8h_a5eb410c37106775b0a557b4f95097123}{\index{lqr.\+h@{lqr.\+h}!lqr\+\_\+set\+\_\+k\+\_\+phi\+\_\+dot@{lqr\+\_\+set\+\_\+k\+\_\+phi\+\_\+dot}}
+\index{lqr\+\_\+set\+\_\+k\+\_\+phi\+\_\+dot@{lqr\+\_\+set\+\_\+k\+\_\+phi\+\_\+dot}!lqr.\+h@{lqr.\+h}}
+\subsubsection[{lqr\+\_\+set\+\_\+k\+\_\+phi\+\_\+dot}]{\setlength{\rightskip}{0pt plus 5cm}void lqr\+\_\+set\+\_\+k\+\_\+phi\+\_\+dot (
+\begin{DoxyParamCaption}
+\item[{double}]{new\+\_\+k\+\_\+phi\+\_\+dot}
+\end{DoxyParamCaption}
+)}}\label{lqr_8h_a5eb410c37106775b0a557b4f95097123}
+
+
+Set new lqr phi\+\_\+dot constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+k\+\_\+phi\+\_\+dot} & New phi\+\_\+dot constant \\
+\hline
+\end{DoxyParams}
+\hypertarget{lqr_8h_a0c8984c4e4b69b4e4e243c6830ac5e1a}{\index{lqr.\+h@{lqr.\+h}!lqr\+\_\+set\+\_\+k\+\_\+x@{lqr\+\_\+set\+\_\+k\+\_\+x}}
+\index{lqr\+\_\+set\+\_\+k\+\_\+x@{lqr\+\_\+set\+\_\+k\+\_\+x}!lqr.\+h@{lqr.\+h}}
+\subsubsection[{lqr\+\_\+set\+\_\+k\+\_\+x}]{\setlength{\rightskip}{0pt plus 5cm}void lqr\+\_\+set\+\_\+k\+\_\+x (
+\begin{DoxyParamCaption}
+\item[{double}]{new\+\_\+k\+\_\+x}
+\end{DoxyParamCaption}
+)}}\label{lqr_8h_a0c8984c4e4b69b4e4e243c6830ac5e1a}
+
+
+Set new lqr x constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+k\+\_\+x} & New x constant \\
+\hline
+\end{DoxyParams}
+\hypertarget{lqr_8h_a3cc7a9bcab885000a3813bcf8429c343}{\index{lqr.\+h@{lqr.\+h}!lqr\+\_\+set\+\_\+k\+\_\+x\+\_\+dot@{lqr\+\_\+set\+\_\+k\+\_\+x\+\_\+dot}}
+\index{lqr\+\_\+set\+\_\+k\+\_\+x\+\_\+dot@{lqr\+\_\+set\+\_\+k\+\_\+x\+\_\+dot}!lqr.\+h@{lqr.\+h}}
+\subsubsection[{lqr\+\_\+set\+\_\+k\+\_\+x\+\_\+dot}]{\setlength{\rightskip}{0pt plus 5cm}void lqr\+\_\+set\+\_\+k\+\_\+x\+\_\+dot (
+\begin{DoxyParamCaption}
+\item[{double}]{new\+\_\+k\+\_\+x\+\_\+dot}
+\end{DoxyParamCaption}
+)}}\label{lqr_8h_a3cc7a9bcab885000a3813bcf8429c343}
+
+
+Set new lqr x\+\_\+dot constant. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+k\+\_\+x\+\_\+dot} & New x\+\_\+dot constant \\
+\hline
+\end{DoxyParams}

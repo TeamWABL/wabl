@@ -1,30 +1,42 @@
-\hypertarget{motor_8h}{\section{motor.\-h File Reference}
-\label{motor_8h}\index{motor.\-h@{motor.\-h}}
+\hypertarget{motor_8h}{\section{motor.\+h File Reference}
+\label{motor_8h}\index{motor.\+h@{motor.\+h}}
 }
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-double \hyperlink{motor_8h_a3a4dd14bf1e092d094ac19ed5b4533d5}{motor\-\_\-pid} (double torque\-Ref, unsigned char motor)
+int16\+\_\+t \hyperlink{motor_8h_a0d660cc657c370291fc1f616aadc91d0}{motor\+\_\+update\+\_\+pid} (uint8\+\_\+t motor, double torque\+Ref)
 \begin{DoxyCompactList}\small\item\em Calculates new motor voltage. \end{DoxyCompactList}\item 
-double \hyperlink{motor_8h_a00ca2f7967b21f5ed5696b3a134e2c2c}{get\-\_\-current\-\_\-value} (double raw)
-\begin{DoxyCompactList}\small\item\em Translate the raw current reading to amps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+double \hyperlink{motor_8h_a00ca2f7967b21f5ed5696b3a134e2c2c}{get\+\_\+current\+\_\+value} (double raw)
+\begin{DoxyCompactList}\small\item\em Translate the raw current reading to amps. \end{DoxyCompactList}\item 
+void \hyperlink{motor_8h_a94014e488c88efff670562ede916434a}{motor\+\_\+set\+\_\+speed} (uint8\+\_\+t motor, int16\+\_\+t speed)
+\begin{DoxyCompactList}\small\item\em Update motor \char`\"{}speed\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{motor_8h_a6c7e445fe14c3c9103d21c65f0be2a9f}{motor\+\_\+set\+\_\+kp} (double new\+\_\+kp)
+\item 
+void \hyperlink{motor_8h_a94f5857017392d7eaa1a046f028e6b00}{motor\+\_\+set\+\_\+ki} (double new\+\_\+ki)
+\item 
+double \hyperlink{motor_8h_acbac619fb0da78fb63fab31303191a57}{motor\+\_\+get\+\_\+current\+\_\+ma} (uint8\+\_\+t motor)
+\begin{DoxyCompactList}\small\item\em Get the current draw of a motor in milliamps. \end{DoxyCompactList}\item 
+double \hyperlink{motor_8h_adb75abb2bedca128dab373dd8646f0dd}{motor\+\_\+get\+\_\+current\+\_\+a} (uint8\+\_\+t motor)
+\begin{DoxyCompactList}\small\item\em Get the current draw of a motor in amps. \end{DoxyCompactList}\item 
+int8\+\_\+t \hyperlink{motor_8h_a7900c83437e2411315e4ff08a71cbe64}{motor\+\_\+get\+\_\+direction} (uint8\+\_\+t motor)
+\begin{DoxyCompactList}\small\item\em Find direction motor is travelling. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-P\-I\-D motor controller module
+P\+I\+D motor controller module
 
 \begin{DoxyAuthor}{Author}
 Andrew Krock 
 \end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-2015-\/03-\/26 03\-:49\-:13  2015-\/05-\/19 20\-:54\-:20 
+2015-\/03-\/26 03\+:49\+:13  2016-\/05-\/ 3 22\+:38\+:04 
 \end{DoxyDate}
 
 
 \subsection{Function Documentation}
-\hypertarget{motor_8h_a00ca2f7967b21f5ed5696b3a134e2c2c}{\index{motor.\-h@{motor.\-h}!get\-\_\-current\-\_\-value@{get\-\_\-current\-\_\-value}}
-\index{get\-\_\-current\-\_\-value@{get\-\_\-current\-\_\-value}!motor.h@{motor.\-h}}
-\subsubsection[{get\-\_\-current\-\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}double get\-\_\-current\-\_\-value (
+\hypertarget{motor_8h_a00ca2f7967b21f5ed5696b3a134e2c2c}{\index{motor.\+h@{motor.\+h}!get\+\_\+current\+\_\+value@{get\+\_\+current\+\_\+value}}
+\index{get\+\_\+current\+\_\+value@{get\+\_\+current\+\_\+value}!motor.\+h@{motor.\+h}}
+\subsubsection[{get\+\_\+current\+\_\+value}]{\setlength{\rightskip}{0pt plus 5cm}double get\+\_\+current\+\_\+value (
 \begin{DoxyParamCaption}
 \item[{double}]{raw}
 \end{DoxyParamCaption}
@@ -41,23 +53,123 @@ Translate the raw current reading to amps.
 \begin{DoxyReturn}{Returns}
 Current in amps 
 \end{DoxyReturn}
-\hypertarget{motor_8h_a3a4dd14bf1e092d094ac19ed5b4533d5}{\index{motor.\-h@{motor.\-h}!motor\-\_\-pid@{motor\-\_\-pid}}
-\index{motor\-\_\-pid@{motor\-\_\-pid}!motor.h@{motor.\-h}}
-\subsubsection[{motor\-\_\-pid}]{\setlength{\rightskip}{0pt plus 5cm}double motor\-\_\-pid (
+\hypertarget{motor_8h_adb75abb2bedca128dab373dd8646f0dd}{\index{motor.\+h@{motor.\+h}!motor\+\_\+get\+\_\+current\+\_\+a@{motor\+\_\+get\+\_\+current\+\_\+a}}
+\index{motor\+\_\+get\+\_\+current\+\_\+a@{motor\+\_\+get\+\_\+current\+\_\+a}!motor.\+h@{motor.\+h}}
+\subsubsection[{motor\+\_\+get\+\_\+current\+\_\+a}]{\setlength{\rightskip}{0pt plus 5cm}double motor\+\_\+get\+\_\+current\+\_\+a (
 \begin{DoxyParamCaption}
-\item[{double}]{torque\-Ref, }
-\item[{unsigned char}]{motor}
+\item[{uint8\+\_\+t}]{motor}
 \end{DoxyParamCaption}
-)}}\label{motor_8h_a3a4dd14bf1e092d094ac19ed5b4533d5}
+)}}\label{motor_8h_adb75abb2bedca128dab373dd8646f0dd}
+
+
+Get the current draw of a motor in amps. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em motor} & M\+O\+T\+O\+R1 or M\+O\+T\+O\+R2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Current in amps 
+\end{DoxyReturn}
+\hypertarget{motor_8h_acbac619fb0da78fb63fab31303191a57}{\index{motor.\+h@{motor.\+h}!motor\+\_\+get\+\_\+current\+\_\+ma@{motor\+\_\+get\+\_\+current\+\_\+ma}}
+\index{motor\+\_\+get\+\_\+current\+\_\+ma@{motor\+\_\+get\+\_\+current\+\_\+ma}!motor.\+h@{motor.\+h}}
+\subsubsection[{motor\+\_\+get\+\_\+current\+\_\+ma}]{\setlength{\rightskip}{0pt plus 5cm}double motor\+\_\+get\+\_\+current\+\_\+ma (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{motor}
+\end{DoxyParamCaption}
+)}}\label{motor_8h_acbac619fb0da78fb63fab31303191a57}
+
+
+Get the current draw of a motor in milliamps. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em motor} & M\+O\+T\+O\+R1 or M\+O\+T\+O\+R2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Current in milliamps 
+\end{DoxyReturn}
+\hypertarget{motor_8h_a7900c83437e2411315e4ff08a71cbe64}{\index{motor.\+h@{motor.\+h}!motor\+\_\+get\+\_\+direction@{motor\+\_\+get\+\_\+direction}}
+\index{motor\+\_\+get\+\_\+direction@{motor\+\_\+get\+\_\+direction}!motor.\+h@{motor.\+h}}
+\subsubsection[{motor\+\_\+get\+\_\+direction}]{\setlength{\rightskip}{0pt plus 5cm}int8\+\_\+t motor\+\_\+get\+\_\+direction (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{motor}
+\end{DoxyParamCaption}
+)}}\label{motor_8h_a7900c83437e2411315e4ff08a71cbe64}
+
+
+Find direction motor is travelling. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em motor} & M\+O\+T\+O\+R1 or M\+O\+T\+O\+R2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 for forward, 0 for stationary, -\/1 for backward 
+\end{DoxyReturn}
+\hypertarget{motor_8h_a94f5857017392d7eaa1a046f028e6b00}{\index{motor.\+h@{motor.\+h}!motor\+\_\+set\+\_\+ki@{motor\+\_\+set\+\_\+ki}}
+\index{motor\+\_\+set\+\_\+ki@{motor\+\_\+set\+\_\+ki}!motor.\+h@{motor.\+h}}
+\subsubsection[{motor\+\_\+set\+\_\+ki}]{\setlength{\rightskip}{0pt plus 5cm}void motor\+\_\+set\+\_\+ki (
+\begin{DoxyParamCaption}
+\item[{double}]{new\+\_\+ki}
+\end{DoxyParamCaption}
+)}}\label{motor_8h_a94f5857017392d7eaa1a046f028e6b00}
+Set a new value for the integral P\+I\+D constant 
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+ki} & Value to set the integral constant to \\
+\hline
+\end{DoxyParams}
+\hypertarget{motor_8h_a6c7e445fe14c3c9103d21c65f0be2a9f}{\index{motor.\+h@{motor.\+h}!motor\+\_\+set\+\_\+kp@{motor\+\_\+set\+\_\+kp}}
+\index{motor\+\_\+set\+\_\+kp@{motor\+\_\+set\+\_\+kp}!motor.\+h@{motor.\+h}}
+\subsubsection[{motor\+\_\+set\+\_\+kp}]{\setlength{\rightskip}{0pt plus 5cm}void motor\+\_\+set\+\_\+kp (
+\begin{DoxyParamCaption}
+\item[{double}]{new\+\_\+kp}
+\end{DoxyParamCaption}
+)}}\label{motor_8h_a6c7e445fe14c3c9103d21c65f0be2a9f}
+Set a new value for the proportional P\+I\+D constant 
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+kp} & Value to set the proportional constant to \\
+\hline
+\end{DoxyParams}
+\hypertarget{motor_8h_a94014e488c88efff670562ede916434a}{\index{motor.\+h@{motor.\+h}!motor\+\_\+set\+\_\+speed@{motor\+\_\+set\+\_\+speed}}
+\index{motor\+\_\+set\+\_\+speed@{motor\+\_\+set\+\_\+speed}!motor.\+h@{motor.\+h}}
+\subsubsection[{motor\+\_\+set\+\_\+speed}]{\setlength{\rightskip}{0pt plus 5cm}void motor\+\_\+set\+\_\+speed (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{motor, }
+\item[{int16\+\_\+t}]{speed}
+\end{DoxyParamCaption}
+)}}\label{motor_8h_a94014e488c88efff670562ede916434a}
+
+
+Update motor \char`\"{}speed\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em motor} & M\+O\+T\+O\+R1 or M\+O\+T\+O\+R2 (motor to update) \\
+\hline
+{\em speed} & Value from -\/255 to 255 that corresponds to the duty cycle applied to the motor \\
+\hline
+\end{DoxyParams}
+\hypertarget{motor_8h_a0d660cc657c370291fc1f616aadc91d0}{\index{motor.\+h@{motor.\+h}!motor\+\_\+update\+\_\+pid@{motor\+\_\+update\+\_\+pid}}
+\index{motor\+\_\+update\+\_\+pid@{motor\+\_\+update\+\_\+pid}!motor.\+h@{motor.\+h}}
+\subsubsection[{motor\+\_\+update\+\_\+pid}]{\setlength{\rightskip}{0pt plus 5cm}int16\+\_\+t motor\+\_\+update\+\_\+pid (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{motor, }
+\item[{double}]{torque\+Ref}
+\end{DoxyParamCaption}
+)}}\label{motor_8h_a0d660cc657c370291fc1f616aadc91d0}
 
 
 Calculates new motor voltage. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em torque\-Ref} & Torque reference from \hyperlink{lqr_8h_a75280381acbf4126bf5927326787ebc2}{lqr()} in N$\ast$m \\
+{\em torque\+Ref} & Torque reference from \hyperlink{lqr_8h_a75280381acbf4126bf5927326787ebc2}{lqr()} in N$\ast$m \\
 \hline
-{\em motor} & M\-O\-T\-O\-R1 or M\-O\-T\-O\-R2 \\
+{\em motor} & M\+O\+T\+O\+R1 or M\+O\+T\+O\+R2 \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
