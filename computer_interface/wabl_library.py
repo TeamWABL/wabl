@@ -61,6 +61,9 @@ def wabl_get_id():
     return id
 
 def wabl_set_motor_kp(new_kp):
+    """Updates the proportional constant for the motor current control loop
+       param    new_kp  The new proprotional constant
+    """
     #pack float as byte array
     new_kp_bytes = struct.pack('f', new_kp)
 
@@ -70,6 +73,9 @@ def wabl_set_motor_kp(new_kp):
         ser.write(bytes(byte))
 
 def wabl_set_motor_ki(new_ki):
+    """Updates the integral constant for the motor current control loop
+       param    new_ki  The new integral constant
+    """
     #pack float as byte array
     new_ki_bytes = struct.pack('f', new_ki)
 
@@ -79,6 +85,9 @@ def wabl_set_motor_ki(new_ki):
         ser.write(bytes(byte))
 
 def wabl_set_lqr_x(new_kx):
+    """Updates the x constant in the lqr outer control loop
+       param    new_kx  The new x constant
+    """
     #pack float as byte array
     new_kx_bytes = struct.pack('f', new_kx)
 
@@ -88,6 +97,9 @@ def wabl_set_lqr_x(new_kx):
         ser.write(bytes(byte))
 
 def wabl_set_lqr_x_dot(new_kx_dot):
+    """Updates the x_dot constant in the lqr outer control loop
+       param    new_kx_dot  The new x_dot constant
+    """
     #pack float as byte array
     new_kx_dot_bytes = struct.pack('f', new_kx_dot)
 
@@ -97,6 +109,9 @@ def wabl_set_lqr_x_dot(new_kx_dot):
         ser.write(bytes(byte))
 
 def wabl_set_lqr_phi(new_kphi):
+    """Updates the phi constant in the lqr outer control loop
+       param    new_kphi  The new phi constant
+    """
     #pack float as byte array
     new_kphi_bytes = struct.pack('f', new_kphi)
 
@@ -106,6 +121,9 @@ def wabl_set_lqr_phi(new_kphi):
         ser.write(bytes(byte))
 
 def wabl_set_lqr_phi_dot(new_kphi_dot):
+    """Updates the phi_dot constant in the lqr outer control loop
+       param    new_kphi_dot  The new phi_dot constant
+    """
     #pack float as byte array
     new_kphi_dot_bytes = struct.pack('f', new_kphi_dot)
 
@@ -115,6 +133,7 @@ def wabl_set_lqr_phi_dot(new_kphi_dot):
         ser.write(bytes(byte))
 
 def clear_screen():
+    """Clears the terminal screen"""
     try:
         os.system('cls')
     except:
@@ -125,6 +144,8 @@ def clear_screen():
         pass
 
 def menu_set_lqr():
+    """Displays menu to set new lqr values"""
+
     correct = False
 
     while (correct == False):
@@ -144,7 +165,6 @@ def menu_set_lqr():
 
 
 if __name__ == "__main__":
-    #test code
     if (wabl_serial_init() == 0):
         print("WABL found on port ", ser.port)
 

@@ -1,0 +1,37 @@
+wabl_serial_init():
+    Initializes serial interface with WABL. WABL must be powered and the XBEE
+    Interface must be plugged into the computer.
+    
+wabl_get_id():
+    Sends command to acquire WABL id. WABL will respond with b'WABL'.
+    This allows the computer to identify WABL on a given port.
+    
+wabl_set_motor_kp(new_kp):
+    Updates the proportional constant for the motor current control loop
+    param    new_kp  The new proprotional constant
+    
+wabl_set_motor_ki(new_ki):
+    Updates the integral constant for the motor current control loop
+    param    new_ki  The new integral constant
+    
+wabl_set_lqr_x(new_kx):
+    Updates the x constant in the lqr outer control loop
+    param    new_kx  The new x constant
+    
+wabl_set_lqr_x_dot(new_kx_dot):
+    Updates the x_dot constant in the lqr outer control loop
+    param    new_kx_dot  The new x_dot constant
+    
+wabl_set_lqr_phi(new_kphi):
+    Updates the phi constant in the lqr outer control loop
+    param    new_kphi  The new phi constant
+    
+wabl_set_lqr_phi_dot(new_kphi_dot):
+    Updates the phi_dot constant in the lqr outer control loop
+    param    new_kphi_dot  The new phi_dot constant
+    
+clear_screen():
+    Clears the terminal screen
+
+menu_set_lqr():
+    Displays menu to set new lqr values
